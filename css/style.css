@@ -1,0 +1,86 @@
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  .divider {
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+  }
+  .highlight-divider {
+    height: 1px;
+    background-color: #444;
+    margin: 20px 0;
+  }
+  .btn-google, .btn-facebook {
+    border: 1px solid #ccc;
+    color: #444;
+    width: 100%;
+  }
+  .social-btn-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-tabs {
+    border-bottom: none;
+  }
+  .nav-tabs .nav-link {
+    border: none;
+    font-size: 1.25rem;
+  }
+  .nav-tabs .nav-link.active {
+    border: none;
+    color: #000;
+    font-weight: bold;
+  }
+  .tab-divider {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .tab-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+  }
+  .tab-divider .active-divider {
+    width: 50%;
+    height: 2px;
+    background-color: #444;
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
+  .or-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .or-divider::before,
+  .or-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+  }
+  .or-divider:not(:empty)::before {
+    margin-right: .25em;
+  }
+  .or-divider:not(:empty)::after {
+    margin-left: .25em;
+  }
+  .small-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+    text-align: center;
+    text-justify: inter-word;
+  }
+
+
