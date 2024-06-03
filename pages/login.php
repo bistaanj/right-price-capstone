@@ -28,14 +28,22 @@
       <div class="active-divider"></div>
     </div>
     <h4 class="text-center mb-4">Log In</h4>
-    <form>
+    <form action="../php/login_function.php" method="post">
       <div class="form-group">
         <label for="email" class="sr-only">Email address</label>
-        <input type="email" id="email" class="form-control" placeholder="Email address*" required>
+        <input name="email" type="email" id="email" class="form-control" placeholder="Email address*" required>
       </div>
       <div class="form-group">
         <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="Password*" required>
+        <input name="password" type="password" id="password" class="form-control" placeholder="Password*" required>
+      </div>
+      <div class="form-group">
+        <?php
+        if (isset($_GET['login_error'])):
+          echo ($_GET['login_error']);
+        endif;
+        ?>
+
       </div>
       <div class="text-right">
         <a href="#" class="small">Forgot password?</a>

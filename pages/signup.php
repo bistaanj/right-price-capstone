@@ -27,22 +27,22 @@
       <div class="active-divider"></div>
     </div>
     <h4 class="text-center mb-4">Sign Up</h4>
-    <form>
+    <form action="../php/register.php" method="post"> 
       <div class="form-group">
         <label for="first-name" class="sr-only">First Name</label>
-        <input type="text" id="first-name" class="form-control" placeholder="First Name*" required>
+        <input name="fname" type="text" id="first-name" class="form-control" placeholder="First Name*" required>
       </div>
       <div class="form-group">
         <label for="last-name" class="sr-only">Last Name</label>
-        <input type="text" id="last-name" class="form-control" placeholder="Last Name*" required>
+        <input name="lname" type="text" id="last-name" class="form-control" placeholder="Last Name*" required>
       </div>
       <div class="form-group">
         <label for="email" class="sr-only">Email address</label>
-        <input type="email" id="email" class="form-control" placeholder="Email address*" required>
+        <input name="email" type="email" id="email" class="form-control" placeholder="Email address*" required>
       </div>
       <div class="form-group">
         <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="Password*" required>
+        <input name="password" type="password" id="password" class="form-control" placeholder="Password*" required>
       </div>
       <div class="text-center small-text mb-3">
         At least 8 characters, 1 uppercase letter, 1 number & 1 symbol.
