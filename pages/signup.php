@@ -30,19 +30,29 @@
     <form action="../php/register.php" method="post"> 
       <div class="form-group">
         <label for="first-name" class="sr-only">First Name</label>
-        <input name="fname" type="text" id="first-name" class="form-control" placeholder="First Name*" required>
+        <input name="fname" type="text" id="first-name" class="form-control" placeholder="First Name*" required
+        value="<?php echo isset($_GET['fname']) ? htmlspecialchars($_GET['fname']) : ''; ?>">
       </div>
       <div class="form-group">
         <label for="last-name" class="sr-only">Last Name</label>
-        <input name="lname" type="text" id="last-name" class="form-control" placeholder="Last Name*" required>
+        <input name="lname" type="text" id="last-name" class="form-control" placeholder="Last Name*" required
+        value="<?php echo isset($_GET['lname']) ? htmlspecialchars($_GET['lname']) : ''; ?>">
       </div>
       <div class="form-group">
         <label for="email" class="sr-only">Email address</label>
-        <input name="email" type="email" id="email" class="form-control" placeholder="Email address*" required>
+        <input name="email" type="email" id="email" class="form-control" placeholder="Email address*" required
+        value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>">
       </div>
       <div class="form-group">
         <label for="password" class="sr-only">Password</label>
         <input name="password" type="password" id="password" class="form-control" placeholder="Password*" required>
+      </div>
+      <div class="form-group">
+        <?php
+        if (isset($_GET['register_error'])):
+          echo ($_GET['register_error']);
+        endif;
+        ?>
       </div>
       <div class="text-center small-text mb-3">
         At least 8 characters, 1 uppercase letter, 1 number & 1 symbol.
