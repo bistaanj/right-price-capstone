@@ -6,6 +6,13 @@
   <title>Login Page</title>
   <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Checks if session is already created -->
+  <?php
+  session_start();
+  if (isset($_SESSION["session_id"])) {
+    header("Location: ../pages/welcome.php");
+  }
+  ?>
   <style>
         <?php
         echo file_get_contents('../css/style.css');

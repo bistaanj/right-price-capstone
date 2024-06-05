@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
+
 <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION["session_id"])) {
+        header("Location: ../pages/login.php");
+    }
+
+    ?>
     Welcome
     <?php
-    session_start(); // Starting the session
-    $name = $_SESSION['username']; // Retrieves the username from the session
+    $name = $_SESSION['username'];
     echo $name;
     ?>
     <div class="">
