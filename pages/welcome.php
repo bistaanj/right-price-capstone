@@ -13,9 +13,15 @@
     echo $name;
     ?>
     <div class="">
+        <?php
+        $sessionId = $_SESSION['session_id'];
+        echo $sessionId;
+        ?>
+    </div>
+    <div class="">
         <form action="../php/logout.php" method='post'>
             <button type="submit" name="submit"> Logout</button>
     </form>
     </div>
-</body>
+   </body>
 </html>
