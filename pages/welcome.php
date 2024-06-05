@@ -12,5 +12,10 @@
     $name = $_SESSION['username']; // Retrieves the username from the session
     echo $name;
     ?>
+    <div class="">
+        <form action="../php/logout.php" method='post'>
+            <button type="submit" name="submit"> Logout</button>
+    </form>
+    </div>
 </body>
 </html>
