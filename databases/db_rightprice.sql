@@ -109,6 +109,7 @@ AUTO_INCREMENT = 19;
 DELIMITER $$
 --
 -- Procedures
+/* trying new trigger */
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `check_user_credentials` (IN `in_email` VARCHAR(255), IN `in_password` VARCHAR(255), OUT `out_session_id` VARCHAR(128), OUT `out_user_id` INT, OUT `out_username` VARCHAR(255), OUT `query_status` VARCHAR(255))   BEGIN
     DECLARE valid_user_id INT;
