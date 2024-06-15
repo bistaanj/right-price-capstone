@@ -57,7 +57,7 @@
       <div class="text-center small-text mb-3">
         At least 8 characters, 1 uppercase letter, 1 number & 1 symbol.
       </div>
-      <button type="submit" class="btn btn-dark btn-block mt-3">Sign Up</button>
+      <button type="submit" name="signup_btn" class="btn btn-dark btn-block mt-3">Sign Up</button>
     </form>
     <p class="small text-center mt-3">By signing up, you agree you've read and accepted our
       Terms and Conditions. Please see our Privacy Policy for 

@@ -28,7 +28,7 @@
 
   <div class="container login-container">
     <div class="text-center mb-4">
-      <a href="signup.php" class="nav-link d-inline">Sign Up</a>
+      <a href="signup.php" name="signup_link" class="nav-link d-inline">Sign Up</a>
       <a href="#" class="nav-link d-inline active">Log In</a>
     </div>
     <div class="tab-divider">
