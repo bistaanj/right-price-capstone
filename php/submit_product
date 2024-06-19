@@ -1,0 +1,77 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_rightprice";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $sales_type = $_POST['sales_type'];
+    $product_name = $_POST['product_name'];
+    $product_category = $_POST['product_category'];
+    $price = $_POST['price'];
+    $unit = $_POST['unit'];
+    $description = $_POST['description'];
+    $image_path = "";
+
+    // Server-side validation
+    if (empty($product_name) || empty($product_category) || empty($price) || empty($unit) || empty($description)) {
+        die("Error: All fields are required.");
+    }
+
+    if ($price <= 0) {
+        die("Error: Price must be a positive number.");
+    }
+
+    // Handling file upload
+    if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] == 0) {
+        $allowed = ["jpg" => "image/jpeg", "jpeg" => "image/jpeg", "png" => "image/png"];
+        $filename = $_FILES['product_image']['name'];
+        $filetype = $_FILES['product_image']['type'];
+        $filesize = $_FILES['product_image']['size'];
+
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if (!array_key_exists($ext, $allowed)) {
+            die("Error: Please select a valid file format.");
+        }
+
+        $maxsize = 5 * 1024 * 1024;
+        if ($filesize > $maxsize) {
+            die("Error: File size is larger than the allowed limit.");
+        }
+
+        $new_filename = uniqid() . "." . $ext;
+        $image_path = "upload/" . $new_filename;
+
+        if (in_array($filetype, $allowed)) {
+            if (!move_uploaded_file($_FILES["product_image"]["tmp_name"], $image_path)) {
+                die("Error: There was a problem uploading your file. Please try again.");
+            }
+        } else {
+            die("Error: There was a problem uploading your file. Please try again.");
+        }
+    } else {
+        die("Error: " . $_FILES["product_image"]["error"]);
+    }
+
+    // Insert data into database
+    $stmt = $conn->prepare("INSERT INTO products (sales_type, product_name, product_category, price, unit, description, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssisss", $sales_type, $product_name, $product_category, $price, $unit, $description, $image_path);
+
+    if ($stmt->execute()) {
+        echo "Product details saved successfully.";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
