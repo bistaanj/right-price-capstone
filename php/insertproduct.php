@@ -41,6 +41,7 @@ try {
             $bind_statement->bind_param("issidsssss", $user, $name, $unit, $pcategory, $price, $imageLink, $description, $addedDate, $product_status, $saleType);
             $result = $bind_statement->execute();
             header("Location: ../pages/dashboard.php");
+            session_end
         } else {
             $register_error = urlencode(implode(' ', $errors));
             header("Location: ../pages/signup.php?register_error=" . $register_error . "&fname=" . urlencode($fname) . "&lname=" . urlencode($lname) . "&email=" . urlencode($email));
