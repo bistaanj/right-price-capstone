@@ -58,36 +58,35 @@
             </ul>
         </nav>
     </header>
-    <main class="container mt-4 flex-grow-1">
+    <main class="container-xl mt-4 flex-grow-1">
         <div class="search-bar d-flex justify-content-center mb-4">
             <input type="text" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;">
             <img src="../images/Search.png" alt="Search Icon" class="search-icon ml-2" onclick="searchFunction()">
         </div>
         <div class="row">
         <div class="product-container">
-                
-                    
             <div class="product-grid">
 
             <!-- Product Card Starts here -->
 
                     <?php
                     if (count($product_info) > 0):
-                        foreach ($product_info as $data): ?>
-                
-                                        <div class="product-card">
-                                            <div class="product-image">
-                                                <img src="https://via.placeholder.com/150" alt="Product Image">
-                                            </div>
-                                            <div class="product-info">
-                                                <h3> <?php echo $data['product_name']; ?> </h3>
-                                                <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
-                                                <button class="btn btn-primary btn-rounded">View Product</button>
-                                                <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
-                                            </div>
+                        foreach ($product_info as $data):
+                            ?>                
+                                    <div class="product-card">
+                                        <div class="product-image">
+                                            <img src="https://via.placeholder.com/150" alt="Product Image">
                                         </div>
-                    
-                                    <?php
+                                        <div class="product-info">
+                                            <h3> <?php echo $data['product_name']; ?> </h3>
+                                            <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
+                                                <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                            <button class="btn btn-primary btn-rounded">View Product</button></a>
+                                            <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
+                                        </div>
+                                    </div>
+
+                                                    <?php
                         endforeach;
                     endif;
                     ?>
