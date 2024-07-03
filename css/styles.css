@@ -57,6 +57,7 @@ nav ul li a svg {
 main {
     padding: 20px;
     margin-top: 20px;
+    flex-grow: 1;
 }
 
 h2 {
@@ -456,4 +457,24 @@ body {
 
 .pr-info-pic{
     height:40vh;
+}
+
+
+.product-image {
+    width: 150px;
+    height: 150px;
+    background-color: #eee;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
