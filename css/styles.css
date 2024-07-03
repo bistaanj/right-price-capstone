@@ -457,3 +457,16 @@ body {
 .pr-info-pic{
     height:40vh;
 }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    margin-top: auto;
+}
