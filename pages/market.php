@@ -19,7 +19,7 @@
     ?>
 
 
-    <header class="d-flex justify-content-between align-items-center p-3 bg-light">
+<header class="d-flex justify-content-between align-items-center p-3 bg-light">
         <div class="logo">
             <img src="../images/RightPriceLogo.jpeg" alt="Logo">
         </div>
@@ -38,13 +38,13 @@
                     </a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="Market.html">
+                    <a class="nav-link d-flex flex-column align-items-center" href="market.php">
                         <i class="bi bi-shop"></i>
                         <span>Market</span>
                     </a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.html">
+                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
                         <i class="bi bi-pencil-square"></i>
                         <span>Blogs</span>
                     </a>

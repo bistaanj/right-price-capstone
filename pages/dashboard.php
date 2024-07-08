@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Price Dashboard</title>
+    <link rel="icon" type="image/png" href="images/RightPriceLogo.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
@@ -12,7 +13,7 @@
     <header class="d-flex justify-content-between align-items-center p-3 bg-light">
         <div class="logo">
             <img src="../images/RightPriceLogo.jpeg" alt="Logo">
-            </div>
+        </div>
         <nav>
             <ul class="nav">
                 <li class="nav-item text-center">
@@ -28,13 +29,13 @@
                     </a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="../php/marketProducts.php">
+                    <a class="nav-link d-flex flex-column align-items-center" href="market.php">
                         <i class="bi bi-shop"></i>
                         <span>Market</span>
                     </a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.html">
+                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
                         <i class="bi bi-pencil-square"></i>
                         <span>Blogs</span>
                     </a>
@@ -49,12 +50,12 @@
         </nav>
     </header>
     <main class="container-fluid mt-4">
-        <div class="row text-center">
-            <div class="col-md-6 d-flex m-auto  bg-primary">
-                <h2 class="text-center">Your Overview</h2>
+        <div class="row">
+            <div class="col-12 text-center overview-heading">
+                <h2>Your Overview</h2>
             </div>
         </div>
-        <div class="row">            
+        <div class="row mt-4">
             <aside class="col-md-3">
                 <div class="sidebar p-3 rounded">
                     <div class="username mb-4 d-flex align-items-center">
@@ -68,7 +69,7 @@
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
                             <i class="bi bi-box-seam"></i>
-                            <a class="nav-link" href="#">Your Products</a>
+                            <a class="nav-link" href="productinfo.php">Your Products</a>
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
                             <i class="bi bi-pencil-square"></i>
