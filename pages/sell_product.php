@@ -49,42 +49,64 @@
 <body>
 <header class="d-flex justify-content-between align-items-center p-3 bg-light">
         <div class="logo">
-            <img src="Images/RightPriceLogo.jpeg" alt="Logo">
+            <img src="../images/RightPriceLogo.jpeg" alt="Logo">
         </div>
-
         <nav>
             <ul class="nav">
-                <li class="nav-item text-center d-flex flex-column align-items-center">
-                    <a class="nav-link d-flex flex-column align-items-center link-dark " href="dashboard.php">
-                        <i class="bi bi-speedometer2"></i>Dashboard</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link d-flex flex-column align-items-center" href="dashboard.php">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
                 </li>
-                <li class="nav-item text-center d-flex flex-column align-items-center">
-                    <i class="bi bi-bag-check"></i>
-                    <a class="nav-link" href="#">Wishlist</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link d-flex flex-column align-items-center" href="wishlist.php">
+                        <i class="bi bi-bag-check"></i>
+                        <span>Wishlist</span>
+                    </a>
                 </li>
-                <li class="nav-item text-center d-flex flex-column align-items-center">
-                    <i class="bi bi-shop"></i>
-                    <a class="nav-link" href="Market.html">Market</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link d-flex flex-column align-items-center" href="market.php">
+                        <i class="bi bi-shop"></i>
+                        <span>Market</span>
+                    </a>
                 </li>
-                <li class="nav-item text-center d-flex flex-column align-items-center">
-                    <i class="bi bi-journal-check"></i>
-                    <a class="nav-link" href="PostBlog.html">Blogs</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
+                        <i class="bi bi-pencil-square"></i>
+                        <span>Blogs</span>
+                    </a>
                 </li>
-                <li class="nav-item text-center d-flex flex-column align-items-center">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <a class="nav-link" href="../php/logout.php">Logout</a>
+                <li class="nav-item text-center">
+                    <a class="nav-link d-flex flex-column align-items-center" href="../php/logout.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Logout</span>
+                    </a>
                 </li>
             </ul>
         </nav>
     </header>
+
     <div class="container">
         <h1>Sell a Product</h1>
         <form action="../php/insertproduct.php" method="post">
-            <div class="form-group">
-                <label for="sales_type">Sales Type</label>
-                <input type="radio" id="sale" name="sales_type" value="sale" checked> Sale
-                <input type="radio" id="auction" name="sales_type" value="auction"> Auction
+       
+        <div class="form-group radio-group">
+            <label for="sales_type">Sales Type</label>
+            <div class="radio-options">
+                <div>
+                    <input type="radio" id="sale" name="sales_type" value="sale" checked>
+                    <label for="sale">Sale</label>
+                </div>
+                <div>
+                    <input type="radio" id="auction" name="sales_type" value="auction">
+                    <label for="auction">Auction</label>
+                </div>
             </div>
+        </div>
+
+
+
             <div class="form-group">
                 <label for="product_name">Product Name</label>
                 <input type="text" id="product_name" name="product_name" required>
