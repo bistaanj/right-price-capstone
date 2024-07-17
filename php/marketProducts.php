@@ -4,6 +4,9 @@ require_once '../php/connection.php';
 
 try {
     session_start();
+    if (isset($_SESSION['product_info'])) {
+        unset($_SESSION['product_info']);
+    }
     $querry = 'SELECT * from tbl_products';
     $result = $connect->query($querry);
     if ($result->num_rows > 0) {
@@ -12,8 +15,8 @@ try {
         }
     }
 
-    header('Location: ../pages/market.php');
     $_SESSION['product_info'] = $products_info;
+    header('Location: ../pages/market.php');
     exit();
 
 

@@ -199,7 +199,7 @@ button[type="submit"] {
     position: relative;
     margin: 20px 0;
     width: 100%;
-    max-width: 600px;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 25px;
@@ -462,4 +462,17 @@ body {
 .form-group.radio-group .radio-options label {
     margin-left: 5px;
     margin-bottom: 0; 
+}
+
+.button-search{
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-image: url('../images/Search.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    background-color: transparent !important;
+
 }
