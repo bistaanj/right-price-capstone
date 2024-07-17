@@ -16,6 +16,7 @@
     <?php
     session_start();
     $product_info = isset($_SESSION['product_info']) ? $_SESSION['product_info'] : [];
+
     ?>
 
 
@@ -59,9 +60,11 @@
         </nav>
     </header>
     <main class="container-xl mt-4 flex-grow-1">
-        <div class="search-bar d-flex justify-content-center mb-4">
-            <input type="text" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;">
-            <img src="../images/Search.png" alt="Search Icon" class="search-icon ml-2" onclick="searchFunction()">
+        <div class="search-bar d-flex flex-row mb-4">
+            <form action="../php/searchProducts.php" method="POST" class="d-flex flex-row align-items-center">
+                <input type="text" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;" name="productName_search">
+                <button type="submit" name="productSearch" class="button-search ml-2"></button>
+            </form>
         </div>
         <div class="row">
         <div class="product-container">
@@ -73,20 +76,20 @@
                     if (count($product_info) > 0):
                         foreach ($product_info as $data):
                             ?>                
-                                    <div class="product-card">
-                                        <div class="product-image">
-                                            <img src="https://via.placeholder.com/150" alt="Product Image">
+                                        <div class="product-card">
+                                            <div class="product-image">
+                                                <img src="https://via.placeholder.com/150" alt="Product Image">
+                                            </div>
+                                            <div class="product-info">
+                                                <h3> <?php echo $data['product_name']; ?> </h3>
+                                                <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
+                                                    <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                                <button class="btn btn-primary btn-rounded">View Product</button></a>
+                                                <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
+                                            </div>
                                         </div>
-                                        <div class="product-info">
-                                            <h3> <?php echo $data['product_name']; ?> </h3>
-                                            <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
-                                                <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
-                                            <button class="btn btn-primary btn-rounded">View Product</button></a>
-                                            <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
-                                        </div>
-                                    </div>
 
-                                                    <?php
+                                                        <?php
                         endforeach;
                     endif;
                     ?>

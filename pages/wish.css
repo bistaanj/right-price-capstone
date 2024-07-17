@@ -1,0 +1,139 @@
+/* Common Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.navbar .navbar-brand .logo {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-item {
+    font-size: 1.2rem;
+}
+
+.nav-item .nav-link {
+    color: #495057;
+}
+
+.nav-item .nav-link:hover {
+    color: #007bff;
+}
+
+h3 {
+    color: #343a40;
+}
+
+/* Wishlist Page */
+#wishlist .table {
+    margin-top: 2rem;
+}
+
+#wishlist .table thead th {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+#wishlist .wishlist-image-placeholder {
+    width: 50px;
+    height: 50px;
+    background-color: #ced4da;
+    border-radius: 5px;
+}
+
+#wishlist .btn-primary {
+    margin-right: 5px;
+}
+
+#wishlist .btn-danger {
+    background-color: #dc3545;
+}
+
+/* Blog Page */
+#blogs .input-group {
+    margin-top: 2rem;
+}
+
+#blogs .blog-card {
+    margin-bottom: 2rem;
+}
+
+#blogs .blog-card .card-body {
+    padding: 1rem;
+}
+
+#blogs .blog-card .card-footer {
+    background-color: #e9ecef;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+#blogs .blog-card .card-link {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Product Detail Page */
+#product-detail .product-image {
+    width: 100%;
+    height: auto;
+    background-color: #ced4da;
+}
+
+#product-detail .btn-primary,
+#product-detail .btn-info,
+#product-detail .btn-secondary {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+#product-detail .card.product-card {
+    margin-bottom: 2rem;
+}
+
+#product-detail .card.product-card img {
+    background-color: #ced4da;
+    width: 100%;
+    height: auto;
+}
+
+#product-detail .card.product-card .card-body {
+    padding: 1rem;
+}
+
+#product-detail .card.product-card .card-text {
+    font-size: 1rem;
+}
+
+#product-detail .card.product-card .card-text strong {
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+    .navbar .navbar-brand .logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav-item {
+        font-size: 1rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    #wishlist .wishlist-image-placeholder {
+        width: 40px;
+        height: 40px;
+    }
+}
