@@ -7,9 +7,9 @@ session_start();
 if (strlen($_POST['productName_search']) > 0) {
     $name = $_POST['productName_search'];
 
-    $querry = "SELECT * from tbl_products where product_name = ?";
+    $querry = "SELECT * from tbl_products where product_name = ? or keyword like '%$name%' ";
     $bind_statement = $connect->prepare($querry);
-    $bind_statement->bind_param("s", $name);
+    $bind_statement->bind_param("s", $name, );
     $bind_statement->execute();
     $result = $bind_statement->get_result();
     if (isset($_SESSION['product_info'])) {

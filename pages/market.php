@@ -76,20 +76,20 @@
                     if (count($product_info) > 0):
                         foreach ($product_info as $data):
                             ?>                
-                                        <div class="product-card">
-                                            <div class="product-image">
-                                                <img src="https://via.placeholder.com/150" alt="Product Image">
-                                            </div>
-                                            <div class="product-info">
-                                                <h3> <?php echo $data['product_name']; ?> </h3>
-                                                <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
-                                                    <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
-                                                <button class="btn btn-primary btn-rounded">View Product</button></a>
-                                                <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
-                                            </div>
-                                        </div>
+                                                <div class="product-card">
+                                                    <div class="product-image">
+                                                        <img src="https://via.placeholder.com/150" alt="Product Image">
+                                                    </div>
+                                                    <div class="product-info">
+                                                        <h3> <?php echo $data['product_name']; ?> </h3>
+                                                        <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
+                                                            <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                                        <button class="btn btn-primary btn-rounded">View Product</button></a>
+                                                        <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
+                                                    </div>
+                                                </div>
 
-                                                        <?php
+                                                                <?php
                         endforeach;
                     endif;
                     ?>
