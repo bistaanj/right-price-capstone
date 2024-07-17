@@ -18,7 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         header("Location: ../pages/login.php");
         exit();
     } else {
-        echo "Invalid Logout";
+        header("Location: ../pages/login.php");
     }
+} else {
+    header("Location: ../pages/login.php");
 }
 ?>
