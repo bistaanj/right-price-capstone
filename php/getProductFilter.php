@@ -2,14 +2,14 @@
 // connection
 require_once '../php/connection.php';
 
-// get the filters values
+// get the filters values.
 $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
 $saleType = isset($_GET['sale_type']) ? $_GET['sale_type'] : '';
 $productType = isset($_GET['product_type']) ? $_GET['product_type'] : '';
 $searchType = isset($_GET['search_type']) ? $_GET['search_type'] : '';
 
 // SQL
-$sql = "SELECT * FROM tbl_products WHERE 1=1";
+$sql = "SELECT * FROM tbl_products WHERE 1 = 1";
 
 // Filter by search
 if (!empty($searchQuery)) {

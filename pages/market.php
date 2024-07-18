@@ -16,9 +16,7 @@
     <?php
     session_start();
     $product_info = isset($_SESSION['product_info']) ? $_SESSION['product_info'] : [];
-
     ?>
-
 
 <header class="d-flex justify-content-between align-items-center p-3 bg-light">
         <div class="logo">
@@ -76,24 +74,26 @@
                     if (count($product_info) > 0):
                         foreach ($product_info as $data):
                             ?>                
-                                        <div class="product-card">
-                                            <div class="product-image">
-                                                <img src="https://via.placeholder.com/150" alt="Product Image">
-                                            </div>
-                                            <div class="product-info">
-                                                <h3> <?php echo $data['product_name']; ?> </h3>
-                                                <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
-                                                    <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
-                                                <button class="btn btn-primary btn-rounded">View Product</button></a>
-                                                <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
-                                            </div>
-                                        </div>
-
-                                                        <?php
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <h3> <?php echo $data['product_name']; ?> </h3>
+                                    <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
+                                    <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                        <button class="btn btn-primary btn-rounded">View Product</button>
+                                    </a>
+                                    <form action="../php/add_wishlist_item.php" method="POST" style="display:inline;">
+                                        <input type="hidden" name="product_id" value="<?php echo $data['product_id']; ?>">
+                                        <button type="submit" class="btn btn-secondary btn-rounded">Add to Wishlist</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <?php
                         endforeach;
                     endif;
                     ?>
-            
             
                 </div>
             </div>
