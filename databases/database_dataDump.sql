@@ -10,7 +10,8 @@ VALUES ('Seeds'),
 
 -- For table products
 INSERT INTO
-    `tbl_products` (`user_id`,
+    `tbl_products` (
+        `user_id`,
         `product_name`,
         `product_category`,
         `product_price`,
@@ -19,9 +20,11 @@ INSERT INTO
         `product_description`,
         `product_added`,
         `product_status`,
-        `sale_type`
+        `sale_type`,
+        `keyword`
     )
-VALUES (1,
+VALUES (
+        1,
         'Corn Seeds',
         1,
         10.99,
@@ -30,9 +33,11 @@ VALUES (1,
         'High-yield corn seeds suitable for various climates. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum tincidunt libero, sit amet pellentesque magna dictum quis. Nullam posuere, mauris nec fermentum gravida, nisi urna tempor turpis, ac lobortis nisi felis et tortor. Nullam at ligula ac felis tempus porttitor. Duis id sapien sed sem sollicitudin ullamcorper. Mauris consequat elit a arcu congue, at congue enim varius. Curabitur interdum purus vitae massa consequat, nec gravida eros laoreet. Duis id quam id orci iaculis sagittis. Proin accumsan erat vitae quam rutrum, et volutpat dui ultricies. Nulla facilisi. Nulla lobortis, felis vel sagittis vehicula, ipsum dui egestas sem, ut viverra odio nisi vel nisi.',
         '2023-01-15',
         'Active',
-        'Sale'
+        'Sale',
+        'corn, seeds, high-yield, climates'
     ),
-    (1,
+    (
+        1,
         'Nitrogen Fertilizer',
         2,
         29.99,
@@ -41,9 +46,11 @@ VALUES (1,
         'Balanced nitrogen fertilizer for crops. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.',
         '2023-02-01',
         'Active',
-        'Sale'
+        'Sale',
+        'nitrogen, fertilizer, balanced, crops'
     ),
-    (1,
+    (
+        1,
         'Insecticide Spray',
         3,
         15.49,
@@ -52,9 +59,11 @@ VALUES (1,
         'Effective insecticide spray for pest control. Donec dapibus. Duis at velit eu est congue elementum. Fusce ultricies urna eget turpis. Sed varius. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi.',
         '2023-02-10',
         'Active',
-        'Auction'
+        'Auction',
+        'insecticide, spray, pest control, machine'
     ),
-    (1,
+    (
+        1,
         'Tractor',
         4,
         15000.00,
@@ -63,9 +72,11 @@ VALUES (1,
         'Powerful tractor for farm operations. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus.',
         '2023-03-05',
         'Active',
-        'Sale'
+        'Sale',
+        'tractor, powerful, farm operations, machine'
     ),
-    (1,
+    (
+        1,
         'Holstein Cow',
         5,
         5000.00,
@@ -74,9 +85,11 @@ VALUES (1,
         'Holstein dairy cow with high milk production. Vivamus luctus.',
         '2023-03-20',
         'Active',
-        'Sale'
+        'Sale',
+        'Holstein, cow, dairy, milk production, animal'
     ),
-    (1,
+    (
+        1,
         'Wheat Seeds',
         1,
         8.99,
@@ -85,9 +98,11 @@ VALUES (1,
         'Premium wheat seeds for bread-making. Sed condimentum.',
         '2023-04-01',
         'Active',
-        'Auction'
+        'Auction',
+        'wheat, seeds, premium, bread-making'
     ),
-    (1,
+    (
+        1,
         'Phosphorus Fertilizer',
         2,
         34.99,
@@ -96,9 +111,11 @@ VALUES (1,
         'Essential phosphorus fertilizer for root development. Duis vitae.',
         '2023-04-15',
         'Active',
-        'Sale'
+        'Sale',
+        'phosphorus, fertilizer, root development'
     ),
-    (1,
+    (
+        1,
         'Herbicide',
         3,
         12.99,
@@ -107,9 +124,11 @@ VALUES (1,
         'Broad-spectrum herbicide for weed control. Sed pharetra.',
         '2023-05-01',
         'Active',
-        'Sale'
+        'Sale',
+        'herbicide, broad-spectrum, weed control'
     ),
-    (1,
+    (
+        1,
         'Combine Harvester',
         4,
         25000.00,
@@ -118,9 +137,11 @@ VALUES (1,
         'Efficient combine harvester for grain harvesting. Proin tincidunt.',
         '2023-05-15',
         'Active',
-        'Sale'
+        'Sale',
+        'combine harvester, efficient, grain harvesting, machine'
     ),
-    (1,
+    (
+        1,
         'Angus Bull',
         5,
         7000.00,
@@ -129,9 +150,11 @@ VALUES (1,
         'Angus beef bull for breeding. Quisque volutpat.',
         '2023-06-01',
         'Active',
-        'Sale'
+        'Sale',
+        'Angus, bull, beef, breeding, animal'
     ),
-    (1,
+    (
+        1,
         'Rice Seeds',
         1,
         12.99,
@@ -140,9 +163,11 @@ VALUES (1,
         'Quality rice seeds suitable for wetland cultivation. Fusce vitae.',
         '2023-06-15',
         'Active',
-        'Auction'
+        'Auction',
+        'rice, seeds, quality, wetland cultivation'
     ),
-    (1,
+    (
+        1,
         'Potassium Fertilizer',
         2,
         39.99,
@@ -151,9 +176,11 @@ VALUES (1,
         'Potassium-rich fertilizer for crop growth. Nam vehicula.',
         '2023-07-01',
         'Active',
-        'Sale'
+        'Sale',
+        'potassium, fertilizer, crop growth'
     ),
-    (1,
+    (
+        1,
         'Rodenticide',
         3,
         9.99,
@@ -162,9 +189,11 @@ VALUES (1,
         'Effective rodenticide for rodent control in farms. Donec sollicitudin.',
         '2023-07-15',
         'Active',
-        'Sale'
+        'Sale',
+        'rodenticide, rodent control, farms'
     ),
-    (1,
+    (
+        1,
         'Seeder Machine',
         4,
         18000.00,
@@ -173,9 +202,11 @@ VALUES (1,
         'Precision seeder machine for planting seeds. Phasellus at.',
         '2023-08-01',
         'Active',
-        'Auction'
+        'Auction',
+        'seeder machine, precision, planting seeds, machine'
     ),
-    (1,
+    (
+        1,
         'Sheep',
         5,
         1500.00,
@@ -184,9 +215,11 @@ VALUES (1,
         'Healthy sheep for wool and meat production. Pellentesque habitant.',
         '2023-08-15',
         'Active',
-        'Sale'
+        'Sale',
+        'sheep, healthy, wool, meat production, animal'
     ),
-    (1,
+    (
+        1,
         'Soybean Seeds',
         1,
         9.99,
@@ -195,9 +228,11 @@ VALUES (1,
         'High-quality soybean seeds for protein production. Nullam bibendum.',
         '2023-09-01',
         'Active',
-        'Sale'
+        'Sale',
+        'soybean, seeds, high-quality, protein production'
     ),
-    (1,
+    (
+        1,
         'Calcium Fertilizer',
         2,
         29.99,
@@ -206,9 +241,11 @@ VALUES (1,
         'Calcium-enriched fertilizer for plant cell structure. Ut luctus.',
         '2023-09-15',
         'Active',
-        'Auction'
+        'Auction',
+        'calcium, fertilizer, plant cell structure'
     ),
-    (1,
+    (
+        1,
         'Fungicide',
         3,
         11.99,
@@ -217,9 +254,11 @@ VALUES (1,
         'Effective fungicide for fungal disease control. Vestibulum at.',
         '2023-10-01',
         'Active',
-        'Sale'
+        'Sale',
+        'fungicide, fungal disease control'
     ),
-    (1,
+    (
+        1,
         'Sprayer',
         4,
         12000.00,
@@ -228,9 +267,11 @@ VALUES (1,
         'Versatile sprayer for pesticide and herbicide application. Quisque fermentum.',
         '2023-10-15',
         'Active',
-        'Sale'
+        'Sale',
+        'sprayer, versatile, pesticide, herbicide application'
     ),
-    (1,
+    (
+        1,
         'Goats',
         5,
         1200.00,
@@ -239,5 +280,6 @@ VALUES (1,
         'Goats for milk and meat production in farms. Maecenas non.',
         '2023-11-01',
         'Active',
-        'Sale'
+        'Sale',
+        'goats, milk, meat production, farms, animal'
     );

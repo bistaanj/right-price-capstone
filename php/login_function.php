@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $result['user_id'];
         $_SESSION['username'] = $result['username'];
         $_SESSION['login_status'] = $result['login_status'];
-        header("Location: ../pages/dashboard.php");
+        header("Location: ../php/dashboardsetup.php");
     } elseif ($result['login_status'] == "User not verified") {
         $login_error = "User not verified";
         header("Location: ../pages/login.php?login_error=" . urldecode($login_error));

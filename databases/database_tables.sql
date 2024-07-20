@@ -48,6 +48,7 @@ CREATE TABLE `tbl_products` (
     `product_added` DATE NOT NULL,
     `product_status` VARCHAR(255) NOT NULL,
     `sale_type` VARCHAR(8) NOT NULL,
+    `keyword` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`product_id`),
     CONSTRAINT `fk_product_category` FOREIGN KEY (`product_category`) REFERENCES `tbl_pcategory` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );

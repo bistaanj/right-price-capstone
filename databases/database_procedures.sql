@@ -77,3 +77,4 @@ CREATE TRIGGER `check_email_duplicate` BEFORE INSERT ON `tbl_user` FOR EACH ROW 
     END IF;
 END
 $$
+
