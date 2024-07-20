@@ -37,8 +37,7 @@
                                 </div>
                                 <div class="product-info">
                                     <h3> <?php echo $data['product_name']; ?> </h3>
-
-                                        <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                    <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
                                     <button class="btn btn-primary btn-rounded">View Product</button></a>
                                     <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
                                 </div>
@@ -47,20 +46,7 @@
                         endforeach;
                     endif;
                     ?>
-                                   <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
-                                        <button class="btn btn-primary btn-rounded">View Product</button>
-                                    </a>
-                                    <form action="../php/add_wishlist_item.php" method="POST" style="display:inline;">
-                                        <input type="hidden" name="product_id" value="<?php echo $data['product_id']; ?>">
-                                        <button type="submit" class="btn btn-secondary btn-rounded">Add to Wishlist</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <?php
-                        endforeach;
-                    endif;
-                    ?>
-                </div>
+</div>
             </div>
         </div>
     </main>
