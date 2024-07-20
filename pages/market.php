@@ -15,7 +15,7 @@
     session_start();
     $product_info = isset($_SESSION['product_info']) ? $_SESSION['product_info'] : [];
     ?>
-    <?php include '../includes/navigation.php'; ?>  
+    <?php include '../includes/navigation.php'; ?> 
     <main class="container-xl mt-4 flex-grow-1">
         <div class="search-bar d-flex flex-row mb-4">
             <form action="../php/searchProducts.php" method="POST" class="d-flex flex-row align-items-center">
@@ -37,13 +37,26 @@
                                 </div>
                                 <div class="product-info">
                                     <h3> <?php echo $data['product_name']; ?> </h3>
-                                    <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
+
                                         <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
                                     <button class="btn btn-primary btn-rounded">View Product</button></a>
                                     <button class="btn btn-secondary btn-rounded">Add to Wishlist</button>
                                 </div>
                             </div>
                     <?php
+                        endforeach;
+                    endif;
+                    ?>
+                                   <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                        <button class="btn btn-primary btn-rounded">View Product</button>
+                                    </a>
+                                    <form action="../php/add_wishlist_item.php" method="POST" style="display:inline;">
+                                        <input type="hidden" name="product_id" value="<?php echo $data['product_id']; ?>">
+                                        <button type="submit" class="btn btn-secondary btn-rounded">Add to Wishlist</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <?php
                         endforeach;
                     endif;
                     ?>
