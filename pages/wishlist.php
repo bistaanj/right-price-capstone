@@ -14,7 +14,7 @@
 <?php include "../includes/navigation.php" ?>    
 <div class="container mt-5">
     <h2 class="text-center">WISHLIST</h2>
-    <table class="table table-bordered mt-3">
+    <table class="table mt-3">
         <thead>
             <tr>
                 <th>PRODUCT</th>
@@ -26,9 +26,8 @@
             <?php
             // connection
             require_once '../php/connection.php';
-
             // get data 
-            $sql = "SELECT wi.wishlist_item_id, p.product_name, p.product_price, p.product_image
+            $sql = "SELECT wi.wishlist_item_id, wi.product_id, p.product_name, p.product_price, p.product_image
                     FROM tbl_wishlist_item wi
                     JOIN tbl_products p ON wi.product_id = p.product_id";
             $result = $connect->query($sql);
@@ -36,12 +35,18 @@
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
-                            <td><img src='" . $row['product_image'] . "' alt='Product Image' class='product-image'> " . $row['product_name'] . "</td>
+                            <td><img src='" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
                             <td>$" . number_format($row['product_price'], 2) . "</td>
                             <td>
                                 <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
                                     <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='submit' class='btn btn-dark'>🗑️</button>
+                                    <button type='submit' class='btn btn-primary btn-sm '>Delete Item 🗑️</button>
+                                    
+                                    <button type='button' class='btn btn-primary mt-2'>
+                                    <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
+                                        View Product
+                                    </a>
+                                    </button>
                                 </form>
                             </td>
                           </tr>";
