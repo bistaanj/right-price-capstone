@@ -10,45 +10,7 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <header class="d-flex justify-content-between align-items-center p-3 bg-light">
-        <div class="logo">
-            <img src="../images/RightPriceLogo.jpeg" alt="Logo">
-        </div>
-        <nav>
-            <ul class="nav">
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="dashboard.php">
-                        <i class="bi bi-speedometer2"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="wishlist.php">
-                        <i class="bi bi-bag-check"></i>
-                        <span>Wishlist</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="../php/marketProducts.php">
-                        <i class="bi bi-shop"></i>
-                        <span>Market</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
-                        <i class="bi bi-pencil-square"></i>
-                        <span>Blogs</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="../php/logout.php">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include "../includes/navigation.php" ?>    
     <main class="container-fluid mt-4">
         <div class="row">
             <div class="col-12 text-center overview-heading">
@@ -60,7 +22,12 @@
                 <div class="sidebar p-3 rounded">
                     <div class="username mb-4 d-flex align-items-center">
                         <i class="bi bi-person-circle" style="margin-right: 10px;"></i>
-                        <span style="color: yellow;">Username</span>
+                        <span style="color: yellow;"> 
+                            <?php
+                               session_start();
+                               echo ($_SESSION['username']);
+                               ?>
+                               </span>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-3 d-flex align-items-center">
@@ -82,13 +49,21 @@
                 <div class="row text-center">
                     <div class="col-md-6 mb-3">
                         <div class="overview-box rounded p-4">
-                            <h1>10</h1>
+                            <h1>
+                                <?php                                
+                                echo $_SESSION['user_sale_count'];
+                                ?>
+                            </h1>
                             <p>Products on Sale</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="overview-box rounded p-4">
-                            <h1>10</h1>
+                            <h1>
+                                <?php
+                                echo $_SESSION['user_auction_count'];
+                                ?>
+                            </h1>
                             <p>Products on Auction</p>
                         </div>
                     </div>
@@ -100,7 +75,11 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="overview-box rounded p-4">
-                            <h1>5</h1>
+                            <h1>
+                            <?php
+                            echo $_SESSION['user_blog_count'];
+                            ?>
+                            </h1>
                             <p>Blogs Posted</p>
                         </div>
                     </div>
