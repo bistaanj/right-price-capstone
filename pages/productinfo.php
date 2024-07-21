@@ -127,6 +127,7 @@ if (isset($_SESSION['current_product'])) {
                             <button class="btn-lg btn-primary rounded-pill border-0"> <span class="text-white">  Add to Wishlist <i class="bi bi-heart-fill float-right"></i> </span></button>
                         </div>
                         <div class="col mt-3">
+                            
                             <button class="btn-lg btn-primary rounded-pill border-0"> Request More Info  <i class="bi bi-info-square float-right"></i></button>
                         </div>
                         <?php
