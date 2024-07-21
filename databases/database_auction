@@ -1,0 +1,32 @@
+CREATE TABLE `db_rightprice`.`tbl_auction` (`offer_id` INT NOT NULL AUTO_INCREMENT , `product_id` INT NOT NULL , `user_id` INT NOT NULL , `amount` FLOAT NOT NULL , PRIMARY KEY (`auction_id`));
+
+
+--Procedure to check if offer is already present
+DELIMITER / /
+
+CREATE PROCEDURE CheckOffer(
+    IN buyer_id INT,
+    IN for_product_id INT,
+    IN offer_amount DECIMAL(10, 2),
+    OUT response_message VARCHAR(255)
+)
+BEGIN
+    DECLARE count INT;
+    SELECT COUNT(*) INTO count
+    FROM tbl_auction
+    WHERE user_id = buyer_id AND product_id = for_product_id;
+
+    IF count > 0 THEN        
+        SET response_message = 'declined';
+    ELSE
+        INSERT INTO tbl_auction (user_id, product_id, amount)
+        VALUES (buyer_id, for_product_id, offer_amount);
+        IF ROW_COUNT() > 0 THEN
+            SET response_message = 'success';
+        ELSE
+            SET response_message = 'error';  
+        END IF;
+    END IF;
+END //
+
+DELIMITER;
