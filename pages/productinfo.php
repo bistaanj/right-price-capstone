@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
 
@@ -16,49 +19,47 @@ if (isset($_SESSION['current_product'])) {
     $info = $_SESSION['current_product'];
     $data = $info[0];
 }
-
 ?>
-      <header class="d-flex justify-content-between align-items-center p-3 bg-light">
-        <div class="logo">
-            <img src="../images/RightPriceLogo.jpeg" alt="Logo">
-        </div>
-        <nav>
-            <ul class="nav">
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="dashboard.php">
-                        <i class="bi bi-speedometer2"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="wishlist.php">
-                        <i class="bi bi-bag-check"></i>
-                        <span>Wishlist</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="market.php">
-                        <i class="bi bi-shop"></i>
-                        <span>Market</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
-                        <i class="bi bi-pencil-square"></i>
-                        <span>Blogs</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="../php/logout.php">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    
+<?php 
+ include '../includes/navigation.php'
+?> 
+<?php 
+    if(isset($_GET["offer_status"])):
+        if($_GET["offer_status"]=='value'):
+?>
+    <script> 
+        window.addEventListener('load',function() {
+        swal("Offer Declined!", "The buyer has set the reserve price.", "error");  
+        })
+    </script>
+<?php
+    elseif($_GET["offer_status"] == 'success') :
+?>
+    <script> 
+        window.addEventListener('load',function() {
+        swal("Offer Sent.", "Your offer has been sent. You will receive an email if your offer gets selected.", "success");  
+        })
+    </script>
+<?php
+    elseif ($_GET["offer_status"] == 'declined'):
+        ?>
+    <script> 
+        window.addEventListener('load',function() {
+        swal("Declined.", "You have already made an offer. Please wait for the result.", "warning");  
+        })
+    </script>
+<?php
+    elseif ($_GET["offer_status"] == 'error'):
+        ?>
+    <script> 
+        window.addEventListener('load',function() {
+        swal("Declined", "There was a problem sending your offer. Please try again later.", "error");  
+        })
+    </script>
+<?php
+    endif;
+    endif;
+?>
     <div class="row justify-content-center mt-2">
         <div class="col-md-11 ">
             <div class="container-fluid ">
@@ -72,7 +73,15 @@ if (isset($_SESSION['current_product'])) {
                                 <img src="/images/<?php echo $data["product_image"]; ?>" style="width:100%; height:100%;" alt="">
                             </div>
                             <div class="text-center mt-2">
-                            Price: $<?php echo $data["product_price"]; ?>/- per <?php echo $data["product_unit"]; ?>
+                                <?php
+                                    if ($data['sale_type'] == 'Auction'){
+                                        echo 'Reserve Price:';
+                                    }
+                                    else{
+                                        echo 'Price:';
+                                    }
+                                ?>
+                          $<?php echo $data["product_price"]; ?>/- per <?php echo $data["product_unit"]; ?>
                             </div>
 
                         </div>
@@ -120,9 +129,46 @@ if (isset($_SESSION['current_product'])) {
                         <div class="col mt-3">
                             <button class="btn-lg btn-primary rounded-pill border-0"> Request More Info  <i class="bi bi-info-square float-right"></i></button>
                         </div>
-                        <div class="col mt-3">
-                            <button class="btn-lg btn-primary rounded-pill border-0"> Send Offer <i class="bi bi-envelope float-right"></i></button>
-                        </div>
+                        <?php
+                        if ($data['sale_type']=='Auction'){
+                            echo '
+                                <div class="col mt-3">
+                                <!-- Button trigger modal -->
+                                    <button type="button" class="btn-lg btn-primary rounded-pill border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                     Send Offer <i class="bi bi-envelope float-right"></i>
+                                    </button>
+                                </div>'; 
+                            } 
+                                ?>
+                                <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title fs-5" id="exampleModalLabel">Send your offer</h1>
+                                        </div>
+                                        <p> Please place your offer. You offer will be sent anonymously.</p>
+                                        <p> Please be advised that this will considered as final amount and will not be allowed to make corrections.</p>
+                                        <form action="../php/sendOffer.php" method="POST">
+                                        <div class="modal-body">
+                                        <div class="input-group mb-3">
+                                           <input type="number" step="0.01" name="user_offer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                            </div>                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" name="send_offer" class="btn btn-primary">Send</button>
+                                        </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                
+                            
+                       
+
+                        
+                        
                     </div>
                 </div>
              </div>
@@ -149,8 +195,9 @@ if (isset($_SESSION['current_product'])) {
             </div>
         </div>
     </footer> -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

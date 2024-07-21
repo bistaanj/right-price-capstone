@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bind_statement->close();
 
 
-    $data = $connect->query("SELECT @session_id AS session_id, @user_id AS user_id, @username AS username, @query_status AS login_status");
+    $data = $connect->query("SELECT @session_id AS session_id, @user_id AS user_id, @username AS username, @query_status AS login_status ");
     $result = $data->fetch_assoc();
 
     /* Storing the data into session after successful login  */
