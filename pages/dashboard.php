@@ -36,7 +36,7 @@
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
                             <i class="bi bi-box-seam"></i>
-                            <a class="nav-link" href="productinfo.php">Your Products</a>
+                            <a class="nav-link" href="../php/getUserproducts.php">Your Products</a>
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
                             <i class="bi bi-pencil-square"></i>

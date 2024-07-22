@@ -1,0 +1,30 @@
+<?php
+            session_start();
+            $product =$_SESSION['user_products'];
+
+            if (!empty($product)) {
+                foreach ($product as $data ) {
+                    echo "<tr>
+                            <td><img src='" . $data['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $data['product_name'] . "</td>
+                            <td>$" . number_format($data['product_price'], 2) . "</td>
+                            <td>
+                                <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
+                                    <input type='hidden' name='wishlist_item_id' value=''>
+                                    <button type='submit' class='btn btn-primary btn-sm '>Delete Item 🗑️</button>
+                                    
+                                    <button type='button' class='btn btn-primary mt-2'>
+                                    <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $data['product_id'] . "'>
+                                        View Product
+                                    </a>
+                                    </button>
+                                </form>
+                            </td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='3' class='text-center'>No items in wishlist</td></tr>";
+            }
+
+            // Close connection
+            
+            ?>
