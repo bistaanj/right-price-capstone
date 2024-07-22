@@ -36,10 +36,14 @@
             // connection
             require_once '../php/connection.php'; 
 
+            session_start();
+            $user_id = $_SESSION['user_id']; // get session id
+
             // get data 
             $sql = "SELECT wi.wishlist_item_id, wi.product_id, p.product_name, p.product_price, p.product_image
                     FROM tbl_wishlist_item wi
-                    JOIN tbl_products p ON wi.product_id = p.product_id";
+                    JOIN tbl_products p ON wi.product_id = p.product_id
+                    where wi.user_id =   $user_id";
             $result = $connect->query($sql);
 
             if ($result->num_rows > 0) {
