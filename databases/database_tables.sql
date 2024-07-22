@@ -57,10 +57,9 @@ CREATE TABLE `tbl_wishlist_item` (
     `wishlist_item_id` INT(11) NOT NULL AUTO_INCREMENT,
     `product_id` INT(11) NOT NULL,
     `quantity` FLOAT NOT NULL,
+    `user_id` INT(11) NOT NULL,
     PRIMARY KEY (`wishlist_item_id`),
     CONSTRAINT `fk_wishlist_product` FOREIGN KEY (`product_id`) REFERENCES `tbl_products` (`product_id`) ON DELETE CASCADE
 );
 
 
-ALTER TABLE `tbl_wishlist_item`
-ADD COLUMN `user_id` INT(11) NOT NULL;

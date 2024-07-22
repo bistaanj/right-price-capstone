@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -16,9 +18,22 @@
 
 <?php
     if (isset($_GET['success'])) {
-        echo "<div class='alert alert-success' role='alert'>" . htmlspecialchars($_GET['success']) . "</div>";
+        ?>
+        <script> 
+        window.addEventListener('load',function() {
+        swal("Success", "Product addded to wishlist", "success");  
+        })
+    </script>
+    <?php
     } elseif (isset($_GET['error'])) {
-        echo "<div class='alert alert-danger' role='alert'>" . htmlspecialchars($_GET['error']) . "</div>";
+    ?>
+
+        <script> 
+        window.addEventListener('load',function() {
+        swal("Declined", "Product already in wishlist", "error");  
+        })
+    </script>
+    <?php
     }
     ?>
 
