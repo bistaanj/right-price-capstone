@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Price - Post a Blog</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
@@ -54,12 +53,12 @@
     <!-- post button name - post-button -->
     <main class="container mt-5">
         <h2 class="text-center">Post a Blog</h2>
-        <form action="../php/postblogendpoint.php" method="post">
+        <form action="../php/postblogendpoint.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input name="title" type="text" class="form-control rounded-pill" placeholder="Title">
             </div>
             <div class="form-group">
-                <input name="image" type="text" class="form-control rounded-pill" placeholder="Cover Picture">
+                <input name="image" type="file" class="form-control rounded-pill" placeholder="Cover Picture">
             </div>
             <div class="form-group">
                 <textarea name="blog_content" class="form-control" rows="10" placeholder="Write your blog here..."></textarea>

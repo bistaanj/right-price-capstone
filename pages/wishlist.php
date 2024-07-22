@@ -13,6 +13,15 @@
 <body>
 <?php include "../includes/navigation.php" ?>    
 <div class="container mt-5">
+
+<?php
+    if (isset($_GET['success'])) {
+        echo "<div class='alert alert-success' role='alert'>" . htmlspecialchars($_GET['success']) . "</div>";
+    } elseif (isset($_GET['error'])) {
+        echo "<div class='alert alert-danger' role='alert'>" . htmlspecialchars($_GET['error']) . "</div>";
+    }
+    ?>
+
     <h2 class="text-center">WISHLIST</h2>
     <table class="table mt-3">
         <thead>
@@ -25,7 +34,8 @@
         <tbody>
             <?php
             // connection
-            require_once '../php/connection.php';
+            require_once '../php/connection.php'; 
+
             // get data 
             $sql = "SELECT wi.wishlist_item_id, wi.product_id, p.product_name, p.product_price, p.product_image
                     FROM tbl_wishlist_item wi

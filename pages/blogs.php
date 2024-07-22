@@ -27,7 +27,7 @@
                 require_once '../php/connection.php';
 
                 //sql
-                $sql = "SELECT b.blog_author, b.blog_published_date, b.blog_title, b.blog_contents, 
+                $sql = "SELECT b.blog_author, b.blog_published_date, b.blog_title, b.blog_contents, b.blog_id,
                                u.fname, u.lname 
                         FROM tbl_blog b
                         JOIN tbl_user u ON b.blog_author = u.user_id
@@ -40,7 +40,7 @@
                         echo '<div class="col-md-3 mb-4">';
                         echo '<div class="blog-card p-3 rounded">';
                         echo '<p>' . $row["blog_contents"] . '</p>';
-                        echo '<a href="#">.....Read More</a>';
+                        echo '<a href="blogRead.php?id=' . $row["blog_id"] . '">.....Read More</a>';
                         echo '<hr>';
                         echo '<p class="author-date">';
                         echo '<span>' . $row["fname"] . ' ' . $row["lname"] . '</span><br>';
