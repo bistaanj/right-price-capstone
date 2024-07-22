@@ -7,7 +7,7 @@ try {
     if (isset($_SESSION['product_info'])) {
         unset($_SESSION['product_info']);
     }
-    $querry = 'SELECT * from tbl_products';
+    $querry = "SELECT * from tbl_products WHERE product_status != 'INACTIVE'";
     $result = $connect->query($querry);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
