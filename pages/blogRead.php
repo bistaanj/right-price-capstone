@@ -57,32 +57,40 @@
     require_once '../php/connection.php';
 
     // sql
-    $sql = "SELECT * FROM tbl_blog WHERE blog_id = $blog_id";
+    //$sql = "SELECT * FROM tbl_blog WHERE blog_id = $blog_id";
+    $sql = "SELECT b.*, CONCAT(u.fname, ' ', u.lname) AS author_name 
+    FROM tbl_blog b
+    JOIN tbl_user u ON b.blog_author = u.user_id
+    WHERE b.blog_id = $blog_id";
     $result = $connect->query($sql);
 
-    
     if ($result === false) {
-        echo "<p>Error en la consulta SQL: " . $connect->error . "</p>";
+        echo "<div class='alert alert-danger'>Error en la consulta SQL: " . $connect->error . "</div>";
     } elseif ($result->num_rows > 0) {
-        // show blog details
         while ($row = $result->fetch_assoc()) {
-            echo "<h2>" . htmlspecialchars($row['blog_title']) . "</h2>";
+            echo "<div class='card mb-4'>";
+            echo "<div class='text-center'>";
+            echo "<h2 class='card-title'>" . htmlspecialchars($row['blog_title']) . "</h2>";
+            echo "<p class='text-muted'>By " . htmlspecialchars($row['author_name']) . " on " . htmlspecialchars($row['blog_published_date']) . "</p>";
+            echo "</div>";
             if (!empty($row['blog_picture'])) {
-                // show the image
                 $imagePath = "../uploads/" . htmlspecialchars($row['blog_picture']);
-                echo "<img src=\"$imagePath\" alt=\"Blog Image\" class=\"img-fluid mb-3\">";
+                echo "<img src=\"$imagePath\" alt=\"Blog Image\" class=\"card-img-top w-50 mx-auto d-block\">";
             }
-            echo "<p>" . nl2br(htmlspecialchars($row['blog_contents'])) . "</p>";
-            echo "<p><small>Author: " . htmlspecialchars($row['blog_author']) . " | Date: " . htmlspecialchars($row['blog_published_date']) . "</small></p>";
+            echo "<div class='card-body'>";
+            echo "<p class='card-text'>" . nl2br(htmlspecialchars($row['blog_contents'])) . "</p>";
+            echo "</div>";
+            echo "</div>";
         }
     } else {
-        echo "<p>Blog not found.</p>";
+        echo "<div class='alert alert-info'>Blog not found.</div>";
     }
 
     // close connection
     $connect->close();
     ?>
 </main>
+
 <footer class="footer mt-5">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="footer-left">

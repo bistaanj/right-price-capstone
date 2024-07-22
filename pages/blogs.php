@@ -37,9 +37,10 @@
                 if ($result->num_rows > 0) {
                     //  HTML
                     while($row = $result->fetch_assoc()) {
-                        echo '<div class="col-md-3 mb-4">';
-                        echo '<div class="blog-card p-3 rounded">';
-                        echo '<p>' . $row["blog_contents"] . '</p>';
+                        $blog_contents_preview = substr($row["blog_contents"], 0, 160) . '...';
+                        echo '<div class="col-md-3 mb-5">';
+                        echo '<div class="blog-card p-4 rounded">';
+                        echo '<p>' . $blog_contents_preview . '</p>';
                         echo '<a href="blogRead.php?id=' . $row["blog_id"] . '">.....Read More</a>';
                         echo '<hr>';
                         echo '<p class="author-date">';
