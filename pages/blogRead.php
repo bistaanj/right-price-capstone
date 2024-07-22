@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Right Price Dashboard</title>
+    <title>Blog Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-
 <body>
 <header class="d-flex justify-content-between align-items-center p-3 bg-light">
     <div class="logo">
@@ -50,64 +48,59 @@
         </ul>
     </nav>
 </header>
+<main class="container mt-4 flex-grow-1">
+    <?php
+    //get id blog
+    $blog_id = $_GET['id'];
 
-<div class="container mt-5">
+    //database 
+    require_once '../php/connection.php';
 
-<?php
-    if (isset($_GET['success'])) {
-        echo "<div class='alert alert-success' role='alert'>" . htmlspecialchars($_GET['success']) . "</div>";
-    } elseif (isset($_GET['error'])) {
-        echo "<div class='alert alert-danger' role='alert'>" . htmlspecialchars($_GET['error']) . "</div>";
-    }
-    ?>
+    // sql
+    $sql = "SELECT * FROM tbl_blog WHERE blog_id = $blog_id";
+    $result = $connect->query($sql);
 
-    <h2 class="text-center">WISHLIST</h2>
-    <table class="table table-bordered mt-3">
-        <thead>
-            <tr>
-                <th>PRODUCT</th>
-                <th>PRICE</th>
-                <th>ACTION</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // connection
-            require_once '../php/connection.php'; 
-
-            // get data 
-            $sql = "SELECT wi.wishlist_item_id, p.product_name, p.product_price, p.product_image
-                    FROM tbl_wishlist_item wi
-                    JOIN tbl_products p ON wi.product_id = p.product_id";
-            $result = $connect->query($sql);
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td><img src='" . $row['product_image'] . "' alt='Product Image' class='product-image'> " . $row['product_name'] . "</td>
-                            <td>$" . number_format($row['product_price'], 2) . "</td>
-                            <td>
-                                <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
-                                    <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='submit' class='btn btn-dark'>🗑️</button>
-                                </form>
-                            </td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='3' class='text-center'>No items in wishlist</td></tr>";
+    
+    if ($result === false) {
+        echo "<p>Error en la consulta SQL: " . $connect->error . "</p>";
+    } elseif ($result->num_rows > 0) {
+        // show blog details
+        while ($row = $result->fetch_assoc()) {
+            echo "<h2>" . htmlspecialchars($row['blog_title']) . "</h2>";
+            if (!empty($row['blog_picture'])) {
+                // show the image
+                $imagePath = "../uploads/" . htmlspecialchars($row['blog_picture']);
+                echo "<img src=\"$imagePath\" alt=\"Blog Image\" class=\"img-fluid mb-3\">";
             }
+            echo "<p>" . nl2br(htmlspecialchars($row['blog_contents'])) . "</p>";
+            echo "<p><small>Author: " . htmlspecialchars($row['blog_author']) . " | Date: " . htmlspecialchars($row['blog_published_date']) . "</small></p>";
+        }
+    } else {
+        echo "<p>Blog not found.</p>";
+    }
 
-            // Close connection
-            $connect->close();
-            ?>
-        </tbody>
-    </table>
-</div>
-
+    // close connection
+    $connect->close();
+    ?>
+</main>
+<footer class="footer mt-5">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="footer-left">
+            <img src="Images/RightPriceLogo.jpeg" alt="Logo" class="footer-logo">
+            <h4>Right Price</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="footer-right">
+            <ul class="footer-links list-inline">
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Contact</a></li>
+                <li class="list-inline-item"><a href="#">Careers</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
