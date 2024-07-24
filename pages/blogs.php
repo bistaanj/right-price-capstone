@@ -41,7 +41,7 @@
                         echo '<div class="col-md-3 mb-5">';
                         echo '<div class="blog-card p-4 rounded">';
                         echo '<p>' . $blog_contents_preview . '</p>';
-                        echo '<a href="blogRead.php?id=' . $row["blog_id"] . '">.....Read More</a>';
+                        echo '<a href="blogRead.php?id=' . $row["blog_id"] . '">...Read More</a>';
                         echo '<hr>';
                         echo '<p class="author-date">';
                         echo '<span>' . $row["fname"] . ' ' . $row["lname"] . '</span><br>';
