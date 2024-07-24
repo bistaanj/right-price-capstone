@@ -7,7 +7,7 @@ class ViewProductDetailsTest(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("http://localhost:8888/capstone_project/pages/login.php")  
+        self.driver.get("http://localhost:3000//pages//login.php")  
         self.driver.maximize_window()
 
     def test_view_product_details(self):
@@ -17,10 +17,10 @@ class ViewProductDetailsTest(unittest.TestCase):
         email_input = driver.find_element(By.ID, "email")
         password_input = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
-         time.sleep(2)
+        time.sleep(2)
 
-        email_input.send_keys("anuragturke24@gmail.com")
-        password_input.send_keys("Turkeboy@007")
+        email_input.send_keys("bistaanj@gmail.com.com")
+        password_input.send_keys("Admin@123")
         login_button.click()
         time.sleep(2)
 

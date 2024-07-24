@@ -43,7 +43,7 @@
             <tr>
                 <th>PRODUCT</th>
                 <th>PRICE</th>
-                <th>ACTION</th>
+                <th class="text-center">ACTION</th>
             </tr>
         </thead>
         <tbody>
@@ -64,7 +64,7 @@
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
-                            <td><img src='" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
+                            <td><div> <img src='" . $row['product_image'] . "' alt='' class='product-image img-thumbnail'> </div> <div class='text-center'> " .  $row['product_name'] . " </div></td>
                             <td>$" . number_format($row['product_price'], 2) . "</td>
                             <td>
                                 <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
@@ -90,6 +90,10 @@
         </tbody>
     </table>
 </div>
+<!-- <?php include '../includes/footer.php' ?> -->
+        </body>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

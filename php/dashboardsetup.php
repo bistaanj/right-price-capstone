@@ -49,4 +49,20 @@ try{
 catch (Exception $e){
     echo "Error: " . $e;
 }
+
+try {
+    $user_id = $_SESSION['user_id'];
+    $querry = "SELECT COUNT(*) as count from tbl_wishlist_item where user_id= ?";
+    $bind_statement = $connect->prepare($querry);
+    $bind_statement->bind_param('i', $user_id);
+    $bind_statement->execute();
+    $result = $bind_statement->get_result();
+    $row = $result->fetch_assoc();
+    $wishlist_count = $row['count'];
+    
+    $_SESSION['user_wishlist_count'] = $wishlist_count;
+    header("Location: ../pages/dashboard.php");
+} catch (Exception $e) {
+    echo "Error: " . $e;
+}
 ?>
