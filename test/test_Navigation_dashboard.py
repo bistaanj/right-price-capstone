@@ -1,57 +1,55 @@
-import time
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
 
-class NavbarNavigationTest(unittest.TestCase):
-
+class NavigationAfterLoginTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("http://localhost:8888/capstone_project/pages/login.php")  # Adjust the URL to your setup
         self.driver.maximize_window()
+        self.driver.get("http://localhost/capstone_project/pages/login.php")
 
-    def test_navbar_navigation(self):
+    def test_navigation_after_login(self):
         driver = self.driver
 
         # Log in
         email_input = driver.find_element(By.ID, "email")
-        password_input = driver.find_element(By.ID, "password")
-        login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
-
         email_input.send_keys("anuragturke24@gmail.com")
-         time.sleep(2)
+        time.sleep(1) 
+
+        password_input = driver.find_element(By.ID, "password")
         password_input.send_keys("Turkeboy@007")
-         time.sleep(2)
+        time.sleep(1)  
+
+        login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
         login_button.click()
+        time.sleep(2)  
 
-        # Wait for login to complete
-        time.sleep(2)
-
-        # Verify that login was successful by checking for the dashboard title
-        self.assertIn("Right Price Dashboard", driver.title)
-
-        # Define the navbar links and the expected titles after navigation
+        # Define the navigation links 
         nav_links = [
-            {"link_text": "Dashboard", "expected_title": "Right Price Dashboard"},
-            {"link_text": "Wishlist", "expected_title": "Wishlist"},
-            {"link_text": "Market", "expected_title": "Market Products"},
-            {"link_text": "Blogs", "expected_title": "Blogs"},
-            {"link_text": "Logout", "expected_title": "Login"}
+            {"link_text": "Dashboard", "expected_title": "Right Price Dashboard", "url": "http://localhost/capstone_project/pages/dashboard.php"},
+            {"link_text": "Wishlist", "expected_title": "Wishlist", "url": "http://localhost/capstone_project/pages/wishlist.php"},
+            {"link_text": "Market", "expected_title": "Market Products", "url": "http://localhost/capstone_project/pages/market.php"},
+            {"link_text": "Blogs", "expected_title": "Blogs", "url": "http://localhost/capstone_project/pages/blogs.php"},
+            {"link_text": "Logout", "expected_title": "Login", "url": "http://localhost/capstone_project/pages/login.php"}
         ]
 
         for link in nav_links:
             # Find the link by link text and click it
             nav_link = driver.find_element(By.LINK_TEXT, link["link_text"])
             nav_link.click()
-            time.sleep(2)  # Wait for the page to load
+            time.sleep(2)  
 
-            # Verify the title of the new page
+           
             self.assertIn(link["expected_title"], driver.title)
 
-            # Navigate back to the dashboard for the next iteration
-            if link["link_text"] != "Dashboard":
-                driver.get("http://localhost:8888/capstone_project/pages/dashboard.php")
-                time.sleep(2)  # Wait for the dashboard to load
+           
+            self.assertEqual(driver.current_url, link["url"])
+
+            # Navigate back to the dashboard for the next iteration (except for logout)
+            if link["link_text"] != "Logout":
+                driver.get("http://localhost/capstone_project/pages/dashboard.php")
+                time.sleep(2)  
 
     def tearDown(self):
         self.driver.quit()

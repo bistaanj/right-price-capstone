@@ -1,51 +1,63 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import  time
+import time
 
-class PostBlogTestCase(unittest.TestCase):
-
+class PostBlogTest(unittest.TestCase):
     def setUp(self):
-        # Set up the webdriver, for example, using Chrome
         self.driver = webdriver.Chrome()
-        self.driver.get("http://localhost/capstone_project/pages/postblog.php")
+        self.driver.maximize_window()
+        self.driver.get("http://localhost/capstone_project/pages/login.php")
 
     def test_post_blog(self):
         driver = self.driver
 
-        # Verify the title of the page
-        self.assertIn("Right Price - Post a Blog", driver.title)
+        # Log in
+        email_input = driver.find_element(By.ID, "email")
+        email_input.send_keys("anuragturke24@gmail.com")
+        time.sleep(1) 
 
-        # Locate and fill in the title input
+        password_input = driver.find_element(By.ID, "password")
+        password_input.send_keys("Turkeboy@007")
+        time.sleep(1)  
+
+        login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
+        login_button.click()
+        time.sleep(2) 
+
+        # Navigate to the Post a Blog page
+        driver.get("http://localhost/capstone_project/pages/postblog.php")
+        time.sleep(2) 
+
+       
         title_input = driver.find_element(By.NAME, "title")
-        title_input.send_keys("My First Blog Post")
-        time.sleep(5)
+        title_input.send_keys("My Test Blog")
+        time.sleep(1)
 
-        # Locate and fill in the cover picture input
+        #Use correct path of image
         image_input = driver.find_element(By.NAME, "image")
-        image_input.send_keys("http://example.com/image.jpg")
+        image_input.send_keys("users/downloads/TestImage.jpg")
+        time.sleep(1)
 
-        # Locate and fill in the blog content textarea
-        blog_content_textarea = driver.find_element(By.NAME, "blog_content")
-        blog_content_textarea.send_keys("This is the content of my first blog post.")
+        content_textarea = driver.find_element(By.NAME, "blog_content")
+        content_textarea.send_keys("This is a test blog post content.")
+        time.sleep(1)
 
-        # Locate and click the post button
+        # Submit the form
         post_button = driver.find_element(By.NAME, "post-button")
         post_button.click()
+        time.sleep(2) 
 
-        # Wait for the response page to load and display the result
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body"))
-        )
+        # Verify 
+        driver.get("http://localhost/capstone_project/pages/blogs.php")
+        time.sleep(2)  # Wait for the page to load
 
-        # Verify successful post submission (Assuming the success message or redirection)
-        self.assertIn("Blog posted successfully", driver.page_source)
+        
+        blogs = driver.find_elements(By.CLASS_NAME, "blog-title")
+        blog_titles = [blog.text for blog in blogs]
+        self.assertIn("My Test Blog", blog_titles)
 
     def tearDown(self):
-        # Close the browser window
         self.driver.quit()
 
 if __name__ == "__main__":
