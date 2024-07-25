@@ -64,8 +64,9 @@ $products = $_SESSION['user_products'];
                             <?php 
                              if ($data['sale_type']=='Auction'){
                                 echo isset($data['total_offer']) && $data['total_offer']>0 ? $data['total_offer'] . "  bidder" : "No bidder";
-                                // echo "(".$data['total_offer']." Offer Received )";
+                                
                             }  ?> 
+                            
                         </div>
                     </td>
                     <td class='text-center align-middle'>
@@ -73,9 +74,12 @@ $products = $_SESSION['user_products'];
                     </td>
                     <td class="align-middle">
                         <div class="d-flex flex-wrap justify-content-center align-items-center">
+                        <?php
+                            if ($data['total_offer'] == null) { ?>
                             <div>
                                 <a href="sell_product.php?id=<?php echo $data['product_id']; ?>" class="btn btn-warning btn-rounded btn-min-width-padding">Edit</a>
                             </div>
+                            <?php } ?>
                             <?php if ($data['sale_type'] == 'Sale') { ?>
                                 <div>
                                     <button class="btn btn-primary btn-rounded btn-min-width-padding"
@@ -87,7 +91,12 @@ $products = $_SESSION['user_products'];
                                     </button>
                                 </div>
                             <?php } ?>
-                            <?php if ($data['sale_type'] == 'Auction') { ?>
+                            <?php
+                             $today = new DateTime();
+                             $product_added = new DateTime($data['product_added']) ;
+                             $interval = $today->diff($product_added);
+                            if ($data['sale_type'] == 'Auction' && $interval->days > 30 ) { 
+                                ?>
                                 <div>
                                     <button class="btn btn-success btn-rounded btn-min-width-padding">Complete Auction</button>
                                 </div>
