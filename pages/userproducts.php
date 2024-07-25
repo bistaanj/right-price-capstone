@@ -6,6 +6,7 @@
     <title>Right Price Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -18,22 +19,17 @@ require_once '../php/connection.php';
 
 // Get the user ID from the session
 $user_id = $_SESSION['user_id'];
-
-// Fetch products associated with the user ID
-$query = "SELECT * FROM tbl_products WHERE user_id = ?";
-$stmt = $connect->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$products = $result->fetch_all(MYSQLI_ASSOC);
+$products = $_SESSION['user_products'];
 ?>
 
 <div class="container mt-5">
     <h2 class="text-center">Your Products</h2>
     <?php if (isset($_GET['status']) && $_GET['status'] == 'success') { ?>
-        <div class="alert alert-success" role="alert">
-            Product updated successfully!
-        </div>
+        <script> 
+        window.addEventListener('load',function() {
+        swal("Product Updated!", "Your Product has been updated successfully", "success");  
+        })
+    </script>
     <?php } ?>
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -64,6 +60,12 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                     <td class='text-center align-middle'>
                         <div>
                             <?php echo $data['sale_type']; ?>
+                            <br>
+                            <?php 
+                             if ($data['sale_type']=='Auction'){
+                                echo isset($data['total_offer']) && $data['total_offer']>0 ? $data['total_offer'] . "  bidder" : "No bidder";
+                                // echo "(".$data['total_offer']." Offer Received )";
+                            }  ?> 
                         </div>
                     </td>
                     <td class='text-center align-middle'>

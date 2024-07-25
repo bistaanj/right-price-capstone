@@ -70,11 +70,11 @@
             <label for="sales_type">Sales Type</label>
             <div class="radio-options">
                 <div>
-                    <input type="radio" id="sale" name="sales_type" value="Sale" <?php echo isset($product) && $product['sale_type'] == 'Sale' ? 'checked' : ''; ?>>
+                    <input type="radio"  id="sale" name="sales_type" value="Sale" <?php echo isset($product) && $product['sale_type'] == 'Sale' ? 'checked' : 'disabled'; ?>>
                     <label for="sale">Sale</label>
                 </div>
                 <div>
-                    <input type="radio" id="auction" name="sales_type" value="Auction" <?php echo isset($product) && $product['sale_type'] == 'Auction' ? 'checked' : ''; ?>>
+                    <input type="radio"  id="auction" name="sales_type" value="Auction" <?php echo isset($product) && $product['sale_type'] == 'Auction' ? 'checked' : ''; ?>>
                     <label for="auction">Auction</label>
                 </div>
             </div>
