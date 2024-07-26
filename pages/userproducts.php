@@ -80,7 +80,7 @@ $products = $_SESSION['user_products'];
                                 <a href="sell_product.php?id=<?php echo $data['product_id']; ?>" class="btn btn-warning btn-rounded btn-min-width-padding">Edit</a>
                             </div>
                             <?php } ?>
-                            <?php if ($data['sale_type'] == 'Sale') { ?>
+                            <?php if ($data['sale_type'] == 'Sale') { ?>                                
                                 <div>
                                     <button class="btn btn-primary btn-rounded btn-min-width-padding"
                                         data-bs-toggle="modal"

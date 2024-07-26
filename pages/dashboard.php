@@ -1,3 +1,7 @@
+<?php 
+include '../includes/checkSession.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +28,7 @@
                         <i class="bi bi-person-circle" style="margin-right: 10px;"></i>
                         <span style="color: yellow;"> 
                             <?php
-                               session_start();
+                               
                                echo ($_SESSION['username']);
                                ?>
                                </span>

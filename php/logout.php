@@ -2,9 +2,6 @@
 session_start();
 require_once '../php/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Query to delete session in the database
-
-
     $querry = "DELETE from tbl_session where session_id = ?";
     $bind_statement = $connect->prepare("$querry");
     $bind_statement->bind_param("s", $_SESSION["session_id"]);
@@ -15,12 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         session_start();
         session_unset();
         session_destroy();
-        header("Location: ../pages/login.php");
+        header("Location: ../pages/login.php?er=success");
         exit();
     } else {
-        header("Location: ../pages/login.php");
+        header("Location: ../pages/login.php?er=1");
     }
 } else {
-    header("Location: ../pages/login.php");
+    header("Location: ../pages/login.php?er=2");
 }
 ?>

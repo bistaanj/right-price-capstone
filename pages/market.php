@@ -1,3 +1,5 @@
+<?php include '../includes/checkSession.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +15,6 @@
 <body>
     <!-- Php to get data from the session -->
     <?php
-    session_start();
     $product_info = isset($_SESSION['product_info']) ? $_SESSION['product_info'] : [];
     ?>
 
