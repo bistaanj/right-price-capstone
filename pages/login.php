@@ -1,3 +1,9 @@
+ <?php
+ session_start();
+ if (isset($_SESSION['session_id'])) {
+   header('Location:../php/dashboardsetup.php');
+ }
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +18,10 @@
   <style>
         <?php
         echo file_get_contents('../css/style.css');
+        
         ?>
     </style>
+   
 </head>
 <body>
 

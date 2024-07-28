@@ -27,7 +27,7 @@ function verify_user($email, $verification_code)
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    $mail->setFrom('bistaanj@gmail.com', 'Right Price ');
+    $mail->setFrom('getrightprice4u@gmail.com', 'Right Price ');
     $mail->addAddress($_POST["email"]);
 
     $mail->isHTML(true);
