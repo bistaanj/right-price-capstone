@@ -36,19 +36,26 @@ try{
                                         @highestAmount AS highestAmount " );
         if($data){
             $result = $data->fetch_assoc();
-            $productName =$result['productname'];
-            $highestBidder =$result['highestBidder_email'];
-            $highestBidder_id =$result['highestBidder'];
-            include '../php/bidCompletionMail.php';
-        }
-        
-    //     if ($result['closure_status']== 'success' ){
-    //         $link = 'name='.$result['highestBidder_name'] . '&product=' . $result['productname'] . '&amount=' . $result['highestAmount'];
-    //         if($result['closure_status'] == 'success'){
-    //             header('Location: ../pages/auction_closure.php?'. urldecode($link));                
-    //         }
-    // }
+            
+            $closure_status = $result['closure_status'];
+            if ($closure_status== 'success' ){
+                $productName =$result['productname'];
+                $highestBidder =$result['highestBidder_email'];
+                $highestBidder_name =$result['highestBidder_name'];
+                $highestBidder_id =$result['highestBidder'];
+                $winning_amount =$result['highestAmount'];
+                include '../php/bidCompletionMail.php';
+                $link = 'name='.$highestBidder_name . '&product=' . $productName . '&amount=' . $winning_amount;
+                header('Location: ../pages/auction_closure.php?'. urldecode($link));    
+                exit();         
+            }elseif($closure_status== 'void'){
+                header('Location: ../pages/auction_void.php?') ;
+                exit();
+            }
     }
+}
+        
+        
     header("Location:../php/getUserProducts.php");
 
 }catch (Exception $e){

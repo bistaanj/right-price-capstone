@@ -12,6 +12,7 @@ if (!isset($_SESSION['session_id'])) {
     $result = $bind_statement->get_result();
     $row = $result->fetch_assoc();
     if ($row['count']!=1){
+        session_destroy();
         header("Location: ../pages/login.php?login_error=" . urldecode('Session Timed Out.'));
     }
 }

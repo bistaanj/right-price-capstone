@@ -1,16 +1,6 @@
-<?php 
+<?php
 
 include '../includes/checkSession.php';
-$name = $email = $amount = null;
-if (isset($_GET['name'])) {
-    $name = $_GET['name'];
-    $product = $_GET['product'];
-    $amount = $_GET['amount'];
-   
-}else{
-    echo 'no data found';
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,15 +18,12 @@ if (isset($_GET['name'])) {
             <h2>Your auction process is complete</h2>
         </div>
         <div class="container d-flex flex-column justify-content-center align-items-center mt-2">
-            <p> The highest amount offered to your product <span class="h3">  <?php echo htmlspecialchars($product); ?> </span> 
-                    was  
-                    <span class="h3"> $ <?php echo htmlspecialchars($amount); ?> </span> 
-                    by  <span class="h3"> <?php echo htmlspecialchars($name) ;?> </span></p>
-
-            <p> We have sent the contact details in your email for contacting purpose.</p>
-
-            <p> <?php echo htmlspecialchars($name); ?>  has also been notified and your contact details has been provided.</p>
-            <p> You might receive a mail soon. </p>
+            <p>
+                We are sorry to hear that you did not receive any offer for your product.
+            </p>
+            <p>
+                You can start a new auction for the product.
+            </p>
         </div>
         <div class="container d-flex flex-column justify-content-center align-items-center mt-2">
             <p>We look forward to hosting another auction soon.</p>
