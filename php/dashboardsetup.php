@@ -1,22 +1,24 @@
 <?php
 include_once "connection.php";
-session_start();
+include '../includes/checkSession.php';
+
 // Fetching the data from tbl_products
 try{
     $user_id = $_SESSION['user_id']; 
     $sales_type = "Sale" ;  
-    $querry = "SELECT COUNT(*) as count from tbl_products where user_id = ? and sale_type = ?";
+    $product_status = 'ACTIVE';
+    $querry = "SELECT COUNT(*) as count from tbl_products where user_id = ? and sale_type = ? and product_status = ?";
     $bind_statement = $connect->prepare($querry);
-    $bind_statement -> bind_param('is',$user_id,$sales_type);
+    $bind_statement -> bind_param('iss',$user_id,$sales_type,$product_status);
     $bind_statement->execute();
     $result = $bind_statement->get_result();
     $row = $result->fetch_assoc();
     $sales_count = $row['count'];
 
     $sales_type = "Auction";
-    $querry = "SELECT COUNT(*) as count from tbl_products where user_id = ? and sale_type = ?";
+    $querry = "SELECT COUNT(*) as count from tbl_products where user_id = ? and sale_type = ? and product_status = ?";
     $bind_statement = $connect->prepare($querry);
-    $bind_statement->bind_param('is', $user_id, $sales_type);
+    $bind_statement->bind_param('iss', $user_id, $sales_type,$product_status);
     $bind_statement->execute();
     $result = $bind_statement->get_result();
     $row = $result->fetch_assoc();

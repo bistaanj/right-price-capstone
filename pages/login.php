@@ -1,3 +1,9 @@
+ <?php
+ session_start();
+ if (isset($_SESSION['session_id'])) {
+   header('Location:../php/dashboardsetup.php');
+ }
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,18 +12,16 @@
   <title>Login Page</title>
   <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Checks if session is already created -->
-  <?php
-  session_start();
-  if (isset($_SESSION["session_id"])) {
-    header("Location: ../pages/welcome.php");
-  }
-  ?>
+ 
   <style>
         <?php
         echo file_get_contents('../css/style.css');
+        
         ?>
     </style>
+   
 </head>
 <body>
 
@@ -44,12 +48,14 @@
         <label for="password" class="sr-only">Password</label>
         <input name="password" type="password" id="password" class="form-control" placeholder="Password*" required>
       </div>
-      <div class="form-group">
-        <?php
-        if (isset($_GET['login_error'])):
-          echo ($_GET['login_error']);
+      <div class="form-group d-flex justify-content-center">
+                  
+          <?php
+          if (isset($_GET['login_error'])):
+          echo '<div class="bg-danger text-wrap p-3 rounded-pill text-white" style="width:max-content;">'.($_GET['login_error']).'</div>';
         endif;
         ?>
+        
 
       </div>
       <div class="text-right">

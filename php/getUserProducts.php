@@ -4,7 +4,13 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
  try{
-    $querry = "SELECT * from tbl_products where user_id = ? ";
+
+    $querry = "SELECT p.*, a.total_offer
+               FROM tbl_products p 
+               LEFT JOIN tbl_auction_details a ON p.product_id = a.product_id 
+               WHERE p.user_id = ? ";
+
+   //  $querry = "SELECT * from tbl_products where user_id = ? ";
     $bind_statement = $connect->prepare($querry);
     $bind_statement->bind_param("i",$user_id);
     $result = $bind_statement->execute();

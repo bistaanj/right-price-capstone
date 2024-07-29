@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <style>
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+            padding: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            width: 30vw;
+        }
+
+        .card {
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: red;
+            text-align: center;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 5vh;
+            text-align: center;
+        }
+        .card-footer{
+            margin-top: 60px;
+        }
+        .product_name{
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+    <title>Email Notification</title>
+</head>
+
+<body>    
+    <div class='container'>
+        <div class='card'>
+            <div class="card-title">
+                <h2>Bid Status Update</h2>
+            </div>
+
+            <div class='card-body'>
+                <p class='card-text'>
+                    <span>This is to inform you that the offer you made to the product</span>
+                    <span class="product_name"> $productName </span> 
+                    <span> was declined because someone placed a higher bid than yours.</span>
+                </div>
+                <div class="card-footer">
+                    <p>
+                        Thank you for participating.
+                    </p>
+                    <p>
+                        <strong>Right Price Team</strong>
+                    </p>
+
+                </div>
+
+                </p>
+        </div>
+    </div>
+</body>
+
+</html>"

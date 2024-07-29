@@ -1,5 +1,6 @@
 <?php
 require_once '../php/connection.php';
+include '../includes/checkSession.php';
 
 try {
     session_start();

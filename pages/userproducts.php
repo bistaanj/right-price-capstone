@@ -6,6 +6,7 @@
     <title>Right Price Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -18,22 +19,17 @@ require_once '../php/connection.php';
 
 // Get the user ID from the session
 $user_id = $_SESSION['user_id'];
-
-// Fetch products associated with the user ID
-$query = "SELECT * FROM tbl_products WHERE user_id = ?";
-$stmt = $connect->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$products = $result->fetch_all(MYSQLI_ASSOC);
+$products = $_SESSION['user_products'];
 ?>
 
 <div class="container mt-5">
     <h2 class="text-center">Your Products</h2>
     <?php if (isset($_GET['status']) && $_GET['status'] == 'success') { ?>
-        <div class="alert alert-success" role="alert">
-            Product updated successfully!
-        </div>
+        <script> 
+        window.addEventListener('load',function() {
+        swal("Product Updated!", "Your Product has been updated successfully", "success");  
+        })
+    </script>
     <?php } ?>
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -64,6 +60,13 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                     <td class='text-center align-middle'>
                         <div>
                             <?php echo $data['sale_type']; ?>
+                            <br>
+                            <?php 
+                             if ($data['sale_type']=='Auction'){
+                                echo isset($data['total_offer']) && $data['total_offer']>0 ? $data['total_offer'] . "  bidder" : "No bidder";
+                                
+                            }  ?> 
+                            
                         </div>
                     </td>
                     <td class='text-center align-middle'>
@@ -71,10 +74,13 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                     </td>
                     <td class="align-middle">
                         <div class="d-flex flex-wrap justify-content-center align-items-center">
+                        <?php
+                            if ($data['total_offer'] == null) { ?>
                             <div>
                                 <a href="sell_product.php?id=<?php echo $data['product_id']; ?>" class="btn btn-warning btn-rounded btn-min-width-padding">Edit</a>
                             </div>
-                            <?php if ($data['sale_type'] == 'Sale') { ?>
+                            <?php } ?>
+                            <?php if ($data['sale_type'] == 'Sale') { ?>                                
                                 <div>
                                     <button class="btn btn-primary btn-rounded btn-min-width-padding"
                                         data-bs-toggle="modal"
@@ -85,9 +91,18 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                                     </button>
                                 </div>
                             <?php } ?>
-                            <?php if ($data['sale_type'] == 'Auction') { ?>
+                            <?php
+                             $today = new DateTime();
+                             $product_added = new DateTime($data['product_added']) ;
+                             $interval = $today->diff($product_added);
+                            if ($data['sale_type'] == 'Auction' && $interval->days > 30  && $data['product_status']=='ACTIVE') { 
+                                ?>
                                 <div>
-                                    <button class="btn btn-success btn-rounded btn-min-width-padding">Complete Auction</button>
+                                    <button class="btn btn-success btn-rounded btn-min-width-padding"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#auctionModal"
+                                                    data-product-id="<?php echo $data['product_id']; ?>"
+                                                    data-transaction="completeAuction">Complete Auction</button>
                                 </div>
                             <?php } ?>
                             <div>
@@ -150,6 +165,26 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         </div>
     </div>
 </div>
+
+<!-- Modal for complete Auction -->
+<div class="modal fade" id="auctionModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="p-2">Completing Auction will finalize you auction.</p>
+                </div>
+                <div class="modal-footer d-flex flex-column">
+                    <form id='deleteForm' action="" method="POST">
+                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
+                        <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, complete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- Script for modals -->
 <script>

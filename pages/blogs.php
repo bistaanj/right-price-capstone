@@ -1,3 +1,5 @@
+<?php include '../includes/checkSession.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

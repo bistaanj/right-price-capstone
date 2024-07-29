@@ -1,3 +1,5 @@
+<?php include '../includes/checkSession.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,15 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Price Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
+    <?php include '../includes/scripts.php' ?>
+   
 </head>
 
 <body>
     <!-- Php to get data from the session -->
     <?php
-    session_start();
     $product_info = isset($_SESSION['product_info']) ? $_SESSION['product_info'] : [];
     ?>
 
