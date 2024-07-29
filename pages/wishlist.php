@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+
+
     <script>
         function confirmDelete(form) {
             swal({
@@ -79,19 +83,29 @@
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    echo "<tr>
+                    echo "<tr class='align-middle' >
                             <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
                             <td>$" . number_format($row['product_price'], 2) . "</td>
-                            <td>
+                            <td class ='d-flex flex-wrap justify-content-center align-items-center'>
                                 <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
                                     <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-sm' onclick='confirmDelete(this.form)'>Delete Item 🗑️</button>
-                                    
-                                    <button type='button' class='btn btn-primary mt-2'>
+                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding ' onclick='confirmDelete(this.form)'>Delete Item </button>
+
                                     <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
-                                        View Product
+                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
+                                        View Product 
+                                         </button>
                                     </a>
-                                    </button>
+
+                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' data-bs-toggle='modal'
+                                        data-bs-target='#orderModal'
+                                        data-product-id= '" . $row['product_id'] . "' >                                    
+                                        Place Order 
+                                        </button>
+
+                                    
+                                   
+                                   
                                 </form>
                             </td>
                           </tr>";
@@ -99,13 +113,68 @@
             } else {
                 echo "<tr><td colspan='3' class='text-center'>No items in wishlist</td></tr>";
             }
-
+            
             // Close connection
             $connect->close();
             ?>
+            <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' data-bs-toggle='modal'
+                                        data-bs-target='#orderModal'
+                                        data-product-id= '' >                                    
+                                        Place Order 
+                                        </button>
+
         </tbody>
     </table>
 </div>
+
+
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="p-2">Would you like to place an order?</p>
+                </div>
+                <div class="modal-footer d-flex flex-column">
+                    <form id='deleteForm' action="" method="POST">
+                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
+                        <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, place oder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Script to send data to modal -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    function updateModalAction(event) {
+        const button = event.relatedTarget; // Button that triggered the modal
+
+        // Extract data from data-* attributes
+        const productId = button.getAttribute('data-product-id');
+        const transactionType = button.getAttribute('data-transaction');
+
+        // Get the target modal ID
+        const modalId = button.getAttribute('data-bs-target').substring(1); // Remove the '#' character
+
+        // Find the modal and its form
+        const modal = document.getElementById(modalId);
+        const form = modal.querySelector('form');
+
+        // Update the form action dynamically
+        form.action = `../php/placeOrder.php?id=${productId}`;
+    }
+
+    // Add event listeners to all modals
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.addEventListener('show.bs.modal', updateModalAction);
+    });
+});
+</script>
+
 <footer class="footer mt-5">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="footer-left">
@@ -126,6 +195,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
