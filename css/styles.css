@@ -41,7 +41,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: #090909;
     font-size: 14px;
     display: flex;
     flex-direction: column;
@@ -508,4 +508,139 @@ body {
     width: max-content;
     padding: 3px;
     margin: 3px;
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-image {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.error-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions .btn {
+    margin-right: 10px;
+}
+
+.error-icon {
+    font-size: 48px;
+    margin-left: 10px;
+    color: #000000;
+    cursor: pointer;
+}
+
+.error-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.error-container img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.error-container p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.error-container .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-container button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.error-container .bi-question-lg {
+    font-size: 24px;
+    margin-left: 10px;
+    color: #040404;
+    cursor: pointer;
+}
+
+.product-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.form-control-plaintext {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.d-flex.align-items-end {
+    align-items: flex-end !important;
 }
