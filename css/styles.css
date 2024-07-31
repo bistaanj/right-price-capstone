@@ -37,22 +37,30 @@ nav ul {
 nav ul li {
     margin: 0 15px;
     text-align: center;
+    transition: transform 0.2s ease-in-out; 
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #090909;
+    color: #090909; 
     font-size: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    transition: transform 0.2s ease-in-out; 
+}
+
+nav ul li a:hover {
+    transform: scale(1.2); 
 }
 
 nav ul li a i,
 nav ul li a svg {
     font-size: 32px;
     margin-bottom: 5px;
+    color: #090909; 
+    transition: transform 0.2s ease-in-out; 
 }
 
 nav ul li a svg {
@@ -63,6 +71,7 @@ main {
     flex: 1;
     padding: 20px;
     margin-top: 20px;
+    flex-grow: 1;
 }
 
 .overview-heading h2 {
