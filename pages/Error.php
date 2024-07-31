@@ -12,7 +12,7 @@
     <?php include '../includes/navigation.php'; ?>
     <main>
     <div class="error-content">
-            <img src="../images/Error.png" alt="Error" class="error-image">
+            <img src="../images/error.png" alt="Error" class="error-image">
             <p class="error-text">There was some error while processing your request. Please try again later or contact the Admin.</p>
             <div class="actions">
                 <button onclick="location.href='dashboard.php'" class="btn btn-primary">See your dashboard</button>
