@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <?php include '../includes/navigation.php'; ?>
-    <main class="container mt-5">
+    <main class="container mt-5 flex-grow-1">
         <div class="row">
             <div class="col-lg-2 text-center">
                 <img src="../images/RightPriceLogo.jpeg" alt="Right Price Logo" class="img-fluid rounded-circle product-image">
@@ -45,5 +45,6 @@
             </div>
         </div>
     </main>
+    <?php include '../includes/footer.php'; ?>
 </body>
 </html>

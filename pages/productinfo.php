@@ -177,26 +177,7 @@ if (isset($_SESSION['current_product'])) {
     </div>
         </div>
     </div>
-
-
-
-    <!-- <footer class="footer mt-5">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="footer-left">
-                <img src="Images/RightPriceLogo.jpeg" alt="Logo" class="footer-logo">
-                <h4>Right Price</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div class="footer-right">
-                <ul class="footer-links list-inline">
-                    <li class="list-inline-item"><a href="#">About</a></li>
-                    <li class="list-inline-item"><a href="#">Contact</a></li>
-                    <li class="list-inline-item"><a href="#">Careers</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer> -->
-    
+    <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
