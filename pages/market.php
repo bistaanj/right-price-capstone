@@ -38,7 +38,7 @@
                             ?>                
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                                    <img src="../images/<?php echo $data['product_image']?>" alt="">
                                 </div>
                                 <div class="product-info">
                                     <h3> <?php echo $data['product_name']; ?> </h3>
