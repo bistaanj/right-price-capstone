@@ -20,10 +20,12 @@
     <?php include "../includes/navigation.php" ?>    
 
     <main class="container-xl mt-4 flex-grow-1">
-        <div class="search-bar d-flex flex-row mb-4">
-            <form action="../php/searchProducts.php" method="POST" class="d-flex flex-row align-items-center">
-                <input type="text" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;" name="productName_search">
-                <button type="submit" name="productSearch" class="button-search ml-2"></button>
+    <div class="search-bar d-flex flex-row mb-4">
+            <form action="../php/searchProducts.php" method="POST" class="d-flex flex-row align-items-center w-100">
+                <input type="text" class="form-control rounded-pill" placeholder="Search" name="productName_search">
+                <button type="submit" name="productSearch" class="button-search">
+                    <i class="bi bi-search search-icon"></i> 
+                </button>
             </form>
         </div>
         <div class="row">
