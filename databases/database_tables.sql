@@ -64,7 +64,7 @@ CREATE TABLE `tbl_wishlist_item` (
 );
 
 
-CREATE TABLE `db_rightprice`.`tbl_order` (
+CREATE TABLE `tbl_order` (
     `order_id` INT NOT NULL AUTO_INCREMENT,
     `buyer_id` INT NOT NULL,
     `seller_id` INT NOT NULL,
@@ -77,4 +77,21 @@ CREATE TABLE `db_rightprice`.`tbl_order` (
     `product_id` INT NOT NULL,
     `order_status` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`order_id`)
+);
+
+-- Table Auction Offer
+CREATE TABLE `tbl_auction_offer` (
+    `offer_id` int(11) NOT NULL AUTO_INCREMENT,
+    `product_id` int(11) NOT NULL,
+    `user_id` int(11) NOT NULL,
+    `amount` float NOT NULL,
+    PRIMARY KEY (`offer_id`)
+);
+
+-- Table Auction Details
+CREATE TABLE `tbl_auction_details` (
+    `auction_id` int(11) NOT NULL AUTO_INCREMENT,
+    `product_id` int(11) NOT NULL,
+    `total_offer` int(11) NOT NULL,
+    PRIMARY KEY (`auction_id`)
 );
