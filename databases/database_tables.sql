@@ -58,8 +58,23 @@ CREATE TABLE `tbl_wishlist_item` (
     `product_id` INT(11) NOT NULL,
     `quantity` FLOAT NOT NULL,
     `user_id` INT(11) NOT NULL,
+    `product_status` VARCHAR(21) NOT NULL,
     PRIMARY KEY (`wishlist_item_id`),
     CONSTRAINT `fk_wishlist_product` FOREIGN KEY (`product_id`) REFERENCES `tbl_products` (`product_id`) ON DELETE CASCADE
 );
 
 
+CREATE TABLE `db_rightprice`.`tbl_order` (
+    `order_id` INT NOT NULL AUTO_INCREMENT,
+    `buyer_id` INT NOT NULL,
+    `seller_id` INT NOT NULL,
+    `address` VARCHAR(255) NOT NULL,
+    `address_secondary` VARCHAR(255) NOT NULL,
+    `city` VARCHAR(255) NOT NULL,
+    `state` VARCHAR(2) NOT NULL,
+    `zip` VARCHAR(10) NOT NULL,
+    `quantity` FLOAT NOT NULL,
+    `product_id` INT NOT NULL,
+    `order_status` VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`order_id`)
+);

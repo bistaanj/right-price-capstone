@@ -17,7 +17,25 @@
         function confirmDelete(form) {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this item!",
+                text: "This product will be removed from your wishlist.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                } else {
+                    swal("Item not removed!");
+                }
+            });
+        }
+    </script>
+    <script>
+        function confirmCancle(form) {
+            swal({
+                title: "Are you sure?",
+                text: "Your order has already been processed. You might be liable for cancelation fee.  ",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -54,7 +72,26 @@
         })
         </script>
     <?php
-    }
+    }  elseif (isset($_GET['requestAccepted'])){
+            
+    ?>
+    <script> 
+        window.addEventListener('load',function() {
+            swal("Order Cancled", "You order has been cancled. You can still order the product from ", "success");  
+        })
+        </script>
+        <?php
+        } elseif (isset($_GET['requestDeclined'])){
+
+            ?>
+            <script> 
+        window.addEventListener('load',function() {
+            swal("Declined", "Your Order has already been dispatched. You cannot cancel the order now.", "error");  
+        })
+        </script>
+            <?php
+        }
+    
     ?>
 
     <h2 class="text-center">WISHLIST</h2>
@@ -75,7 +112,7 @@
             $user_id = $_SESSION['user_id']; // get session id
 
             // get data 
-            $sql = "SELECT wi.wishlist_item_id, wi.product_id, p.product_name, p.product_price, p.product_image
+            $sql = "SELECT wi.wishlist_item_id, wi.product_id, wi.product_status, p.product_name, p.product_price, p.product_image
                     FROM tbl_wishlist_item wi
                     JOIN tbl_products p ON wi.product_id = p.product_id
                     WHERE wi.user_id = $user_id";
@@ -83,32 +120,54 @@
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
+                    if($row['product_status']=='UNORDERED'){
                     echo "<tr class='align-middle' >
                             <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
                             <td>$" . number_format($row['product_price'], 2) . "</td>
                             <td class ='d-flex flex-wrap justify-content-center align-items-center'>
                                 <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
                                     <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding ' onclick='confirmDelete(this.form)'>Delete Item </button>
+                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding ' 
+                                    onclick='confirmDelete(this.form)'>Delete Item </button>
 
                                     <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
                                     <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
                                         View Product 
                                          </button>
                                     </a>
-
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' data-bs-toggle='modal'
-                                        data-bs-target='#orderModal'
-                                        data-product-id= '" . $row['product_id'] . "' >                                    
+                                    <a style='color:white; text-decoration:none' href='../php/placeOrder.php?id=" . $row['product_id'] . "'>
+                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
                                         Place Order 
-                                        </button>
-
-                                    
-                                   
-                                   
+                                         </button>
+                                    </a>
                                 </form>
                             </td>
                           </tr>";
+                    }else{
+                        echo "<tr class='align-middle' >
+                            <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
+                            <td>$" . number_format($row['product_price'], 2) . "</td>
+                            <td class ='d-flex flex-wrap justify-content-center align-items-center'>
+                                <form action='../php/cancleOrder.php' method='POST' style='display:inline;'>
+                                    <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
+                                    <button type='button' class='btn btn-danger btn-rounded btn-min-width-padding ' 
+                                    onclick='confirmCancle(this.form)'> Cancle Order </button>
+
+                                    <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
+                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
+                                        View Product 
+                                         </button>
+                                    </a>
+                                    <input type='hidden' name='product_id' value='". $row['product_id']."'>
+                                    <button type='submit' name='cancleOrder' disabled class='btn btn-warning btn-rounded btn-min-width-padding text-black font-weight-bold '>                                    
+                                        Order Placed
+                                         </button>
+                                    </a>
+                                </form>
+                            </td>
+                          </tr>";
+
+                    }
                 }
             } else {
                 echo "<tr><td colspan='3' class='text-center'>No items in wishlist</td></tr>";
@@ -117,35 +176,12 @@
             // Close connection
             $connect->close();
             ?>
-            <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' data-bs-toggle='modal'
-                                        data-bs-target='#orderModal'
-                                        data-product-id= '' >                                    
-                                        Place Order 
-                                        </button>
-
         </tbody>
     </table>
 </div>
 
 
-<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h3>
-                </div>
-                <div class="modal-body">
-                    <p class="p-2">Would you like to place an order?</p>
-                </div>
-                <div class="modal-footer d-flex flex-column">
-                    <form id='deleteForm' action="" method="POST">
-                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
-                        <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, place oder</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 <!-- Script to send data to modal -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -157,8 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const transactionType = button.getAttribute('data-transaction');
 
         // Get the target modal ID
-        const modalId = button.getAttribute('data-bs-target').substring(1); // Remove the '#' character
-
+        const modalId = button.getAttribute('data-bs-target').substring(1);
         // Find the modal and its form
         const modal = document.getElementById(modalId);
         const form = modal.querySelector('form');
