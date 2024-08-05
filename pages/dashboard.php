@@ -43,6 +43,10 @@ include '../includes/checkSession.php'
                             <a class="nav-link" href="../php/getUserproducts.php">Your Products</a>
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
+                            <i class="bi bi-box-seam"></i>
+                            <a class="nav-link" href="../php/getOrders.php">Your Orders</a>
+                        </li>
+                        <li class="nav-item mb-3 d-flex align-items-center">
                             <i class="bi bi-pencil-square"></i>
                             <a class="nav-link" href="postblog.php">Post a Blog</a>
                         </li>
