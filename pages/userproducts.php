@@ -50,7 +50,7 @@ $products = $_SESSION['user_products'];
                     <th scope="row" class='text-center align-middle'><?php echo $data['product_id']; ?></th>
                     <td>
                         <div class="container d-flex justify-content-center">
-                            <img src="../images/<?php echo $data['product_image'] ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image">
+                            <img src="../images/<?php echo $data['product_image'] ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image" style="width: 100px; height: auto; margin-right: 10px;">
                         </div>
                         <div class="container-fluid text-center">
                             <?php echo $data['product_name']; ?>
@@ -63,8 +63,7 @@ $products = $_SESSION['user_products'];
                             <br>
                             <?php 
                              if ($data['sale_type']=='Auction'){
-                                echo isset($data['total_offer']) && $data['total_offer']>0 ? $data['total_offer'] . "  bidder" : "No bidder";
-                                
+                                echo isset($data['total_offer']) && $data['total_offer' ]> 0 ? $data['total_offer'] . "  bidder" : "No bidder";                                
                             }  ?> 
                             
                         </div>
@@ -94,7 +93,7 @@ $products = $_SESSION['user_products'];
                             <?php
                              $today = new DateTime();
                              $product_added = new DateTime($data['product_added']) ;
-                             $interval = $today->diff($product_added);
+                             $interval = $today->diff($product_added);                             
                             if ($data['sale_type'] == 'Auction' && $interval->days > 30  && $data['product_status']=='ACTIVE') { 
                                 ?>
                                 <div>
