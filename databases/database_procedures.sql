@@ -158,7 +158,7 @@ DELIMITER;
 
 
 --Procedure to check if offer is already present
-DELIMITER $$
+ DELIMITER $$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `check_buyer`(IN `buyer_id` INT, IN `for_product_id` INT, IN `offer_amount` DECIMAL(10,2), OUT `response_message` VARCHAR(255))
 BEGIN
@@ -172,9 +172,16 @@ BEGIN
     ELSE
         INSERT INTO tbl_auction_offer (user_id, product_id, amount)
         VALUES (buyer_id, for_product_id, offer_amount);
-        INSERT INTO tbl_auction_details (product_id, total_offer)
-VALUES (for_product_id, 1)
-ON DUPLICATE KEY UPDATE total_offer = total_offer + 1;
+        IF EXISTS (SELECT 1 FROM tbl_auction_details WHERE product_id = for_product_id) THEN
+    -- If it exists, update the total_offer
+    UPDATE tbl_auction_details
+    SET total_offer = total_offer + 1
+    WHERE product_id = for_product_id;
+ELSE
+    -- If it does not exist, insert a new row
+    INSERT INTO tbl_auction_details (product_id, total_offer)
+    VALUES (for_product_id, 1);
+END IF;
         IF ROW_COUNT() > 0 THEN
             SET response_message = 'success';
         ELSE

@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $bind_statement->bind_param("s", $_SESSION["session_id"]);
     $result = $bind_statement->execute();
     $connect->close();
+    
 
     if ($result) {
         session_start();
