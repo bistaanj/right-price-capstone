@@ -10,7 +10,7 @@ try {
     if (isset($_SESSION['product_info'])) {
         unset($_SESSION['product_info']);
     }
-    $querry = "SELECT * from tbl_products WHERE product_status != ? AND product_id != ? ORDER By RAND() LIMIT 8";
+    $querry = "SELECT * from tbl_products WHERE product_status != ? AND user_id != ? ORDER By RAND() LIMIT 8";
     $bind_statement = $connect->prepare($querry);
     $bind_statement->bind_param('si', $status , $user_id);
     $bind_statement->execute();

@@ -8,7 +8,7 @@ try{
     JOIN 
         tbl_products p ON o.product_id = p.product_id
     JOIN 
-        tbl_user u ON o.buyer_id = u.user_id";
+        tbl_user u ON o.seller_id = u.user_id";
     $result = $connect->query($querry);
     if($result){       
         while ($row = $result->fetch_assoc()){

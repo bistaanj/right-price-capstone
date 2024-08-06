@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <link rel="stylesheet" href="../css/styles.css">
-
-
     <script>
         function confirmDelete(form) {
             swal({
@@ -32,10 +29,10 @@
         }
     </script>
     <script>
-        function confirmCancle(form) {
+        function confirmCancel(form) {
             swal({
                 title: "Are you sure?",
-                text: "Your order has already been processed. You might be liable for cancelation fee.  ",
+                text: "Your order has already been processed. You might be liable for cancellation fee.",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -53,133 +50,184 @@
 
 <body>
 <?php include "../includes/navigation.php" ?>    
-<div class="container mt-5">
+<div class="mt-5 w-50 align-self-center">
 
 <?php
-    if (isset($_GET['success'])) {
-        ?>
-        <script> 
-        window.addEventListener('load',function() {
-            swal("Success", "Product added to wishlist", "success");  
-        })
-        </script>
-        <?php
-    } elseif (isset($_GET['error'])) {
-    ?>
-        <script> 
-        window.addEventListener('load',function() {
-            swal("Declined", "Product already in wishlist", "error");  
-        })
-        </script>
-    <?php
-    }  elseif (isset($_GET['requestAccepted'])){
-            
-    ?>
-    <script> 
-        window.addEventListener('load',function() {
-            swal("Order Cancled", "You order has been cancled. You can still order the product from ", "success");  
-        })
-        </script>
-        <?php
-        } elseif (isset($_GET['requestDeclined'])){
+if (isset($_GET['success'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Success", "Product added to wishlist", "success"); })</script>';
+} elseif (isset($_GET['error'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Declined", "Product already in wishlist", "error"); })</script>';
+} elseif (isset($_GET['requestAccepted'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Order Canceled", "Your order has been canceled. You can still order the product from ", "success"); })</script>';
+} elseif (isset($_GET['requestDeclined'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Declined", "Your Order has already been dispatched. You cannot cancel the order now.", "error"); })</script>';
+}
+?>
 
-            ?>
-            <script> 
-        window.addEventListener('load',function() {
-            swal("Declined", "Your Order has already been dispatched. You cannot cancel the order now.", "error");  
-        })
-        </script>
-            <?php
-        }
-    
-    ?>
-
+    <div class="mt-5 ">
     <h2 class="text-center">WISHLIST</h2>
-    <table class="table mt-3">
-        <thead>
+    <table class="table table-striped  mt-3">
+        <thead class="thead-dark">
             <tr>
-                <th>PRODUCT</th>
-                <th>PRICE</th>
-                <th class="text-center">ACTION</th>
+                <th class='text-center' style="width: 20%;">PRODUCT</th>
+                <th class='text-center' style="width: 20%;">PRICE</th>
+                <th class='text-center' style="width: 50%;">ACTION</th>
             </tr>
         </thead>
         <tbody>
             <?php
             // connection
-            require_once '../php/connection.php'; 
+            require_once '../php/connection.php';
 
-            
             $user_id = $_SESSION['user_id']; // get session id
-
+            
             // get data 
-            $sql = "SELECT wi.wishlist_item_id, wi.product_id, wi.product_status, p.product_name, p.product_price, p.product_image
+            $sql = "SELECT wi.wishlist_item_id, wi.product_id, wi.product_status, p.product_name, p.product_price, p.product_unit, p.product_image, p.sale_type
                     FROM tbl_wishlist_item wi
                     JOIN tbl_products p ON wi.product_id = p.product_id
                     WHERE wi.user_id = $user_id";
             $result = $connect->query($sql);
 
             if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    if($row['product_status']=='UNORDERED'){
-                    echo "<tr class='align-middle' >
-                            <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
-                            <td>$" . number_format($row['product_price'], 2) . "</td>
-                            <td class ='d-flex flex-wrap justify-content-center align-items-center'>
-                                <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
-                                    <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding ' 
-                                    onclick='confirmDelete(this.form)'>Delete Item </button>
-
-                                    <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
-                                        View Product 
-                                         </button>
+                while ($row = $result->fetch_assoc()) {
+                    if ($row['product_status'] == 'UNORDERED' && $row['sale_type'] == 'Sale') {
+                        echo "<tr>
+                            <td class='align-middle'>
+                                <div class='d-flex align-items-center'>
+                                    <img src='../images/" . $row['product_image'] . "' alt='Product Image' class='img-thumbnail' style='width: 100px; height: auto; margin-right: 10px;'> 
+                                    <div>
+                                        <h5 class='mb-0'>" . $row['product_name'] . "</h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class='align-middle text-center'>
+                                <div> 
+                                    <h5 class='mb-0'>$" . number_format($row['product_price'], 2) . "</h5>
+                                    <small>per " . $row['product_unit'] . "</small>
+                                </div>
+                            </td>
+                            <td class='align-middle'>
+                                <div class='d-flex text-center flex-wrap justify-content-around align-items-center'>
+                                    <div>
+                                        <form action='../php/delete_wishlist_item.php' method='post' class='mb-2'>
+                                            <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
+                                            <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
+                                                <i class='bi bi-trash-fill p-3'></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "> 
+                                            <button 'class='btn btn-primary' style='width:120px;'>
+                                                View Product
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div>
+                                    <a href='../php/placeOrder.php?id=" . $row['product_id'] . "' > 
+                                    <button class='btn btn-primary' style='width:120px;'>
+                                    Place Order
+                                    </button>
                                     </a>
-                                    <a style='color:white; text-decoration:none' href='../php/placeOrder.php?id=" . $row['product_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
-                                        Place Order 
-                                         </button>
-                                    </a>
-                                </form>
+                                    </div>
+                                </div>
                             </td>
                           </tr>";
-                    }else{
-                        echo "<tr class='align-middle' >
-                            <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
-                            <td>$" . number_format($row['product_price'], 2) . "</td>
-                            <td class ='d-flex flex-wrap justify-content-center align-items-center'>
-                                <form action='../php/cancleOrder.php' method='POST' style='display:inline;'>
-                                    <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='button' class='btn btn-danger btn-rounded btn-min-width-padding ' 
-                                    onclick='confirmCancle(this.form)'> Cancle Order </button>
-
-                                    <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
+                    } elseif ($row['product_status'] == 'ORDERED' && $row['sale_type'] == 'Sale') {
+                        echo "<tr>
+                            <td class='align-middle'>
+                                <div class='d-flex align-items-center'>
+                                    <img src='../images/" . $row['product_image'] . "' alt='Product Image' class='img-thumbnail' style='width: 100px; height: auto; margin-right: 10px;'> 
+                                    <div>
+                                        <h5 class='mb-0'>" . $row['product_name'] . "</h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class='align-middle text-center'>
+                                <div> 
+                                    <h5 class='mb-0'>$" . number_format($row['product_price'], 2) . "</h5>
+                                    <small>per " . $row['product_unit'] . "</small>
+                                </div>
+                            </td>
+                            <td class='align-middle'>
+                                <div class='d-flex flex-wrap justify-content-around align-items-center'>
+                                <div>
+                                    <form action='../php/cancleOrder.php' method='POST' class='mb-2'>
+                                        <input type='hidden' name='product_id' value='" . $row['product_id'] . "'>
+                                        <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
+                                                <i class='bi bi-x-circle p-3'></i>
+                                            </button>
+                                    </form> 
+                                </div>
+                                <div>
+                                    <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
+                                    <button class='btn btn-primary' style='width:120px;'>
                                         View Product 
-                                         </button>
+                                    </button>
                                     </a>
-                                    <input type='hidden' name='product_id' value='". $row['product_id']."'>
-                                    <button type='submit' name='cancleOrder' disabled class='btn btn-warning btn-rounded btn-min-width-padding text-black font-weight-bold '>                                    
-                                        Order Placed
-                                         </button>
-                                    </a>
-                                </form>
+                                </div>
+                                <div>
+                                    <button class='btn btn-info' style='width:125px;' disabled>
+                                        Order Placed 
+                                    </button>
+                                </div>
+                                </div>
+                            </td>
+                        </tr>";
+                    } elseif ($row['sale_type'] == 'Auction') {
+                        echo "<tr>
+                            <td class='align-middle'>
+                                <div class='d-flex align-items-center'>
+                                    <img src='../images/" . $row['product_image'] . "' alt='Product Image' class='img-thumbnail' style='width: 100px; height: auto; margin-right: 10px;'> 
+                                    <div>
+                                        <h5 class='mb-0'>" . $row['product_name'] . "</h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class='align-middle text-center'>
+                                <div> 
+                                    <h5 class='mb-0'>$" . number_format($row['product_price'], 2) . "</h5>
+                                    <small>per " . $row['product_unit'] . "</small>
+                                </div>
+                            </td>
+                            <td class='text-center '>
+                                <div class='d-flex flex-wrap justify-content-center align-items-center'>
+                                    <div>
+                                        <form action='../php/delete_wishlist_item.php' method='post' class='mb-2'>
+                                            <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
+                                            <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
+                                                <i class='bi bi-trash-fill p-3'></i>
+                                            </button>
+                                        </form>
+                                    </div>                                    
+                                    <div>". ""
+                                        // <div>
+                                        //     <p>You can make an offer from</p>
+                                        // </div>
+                                        // <div>
+                                            ." <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
+                                                <button class='btn btn-primary' style='width:120px;'>
+                                                    View Product 
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </td>
                           </tr>";
-
                     }
                 }
             } else {
                 echo "<tr><td colspan='3' class='text-center'>No items in wishlist</td></tr>";
             }
-            
+
             // Close connection
             $connect->close();
             ?>
         </tbody>
     </table>
 </div>
-
 
 
 <!-- Script to send data to modal -->
@@ -216,5 +264,4 @@ document.addEventListener('DOMContentLoaded', function () {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
-
 </html>

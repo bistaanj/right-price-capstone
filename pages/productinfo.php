@@ -1,3 +1,6 @@
+<?php 
+include '../includes/checkSession.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
 <body>
 
 <?php
-session_start();
+
 if (isset($_SESSION['current_product'])) {
     $info = $_SESSION['current_product'];
     $data = $info[0];
@@ -124,12 +127,23 @@ if (isset($_SESSION['current_product'])) {
                 <div class="row ">
                     <div class="col-md-4 text-center">
                         <div class="col mt-3">
-                            <button class="btn-lg btn-primary rounded-pill border-0"> <span class="text-white">  Add to Wishlist <i class="bi bi-heart-fill float-right"></i> </span></button>
+                            <form action="../php/add_wishlist_item.php" method='POST'>
+                            <input type="hidden" name="product_id" value='<?php  echo $data['product_id'] ?>' >
+                            <button type='submit' class="btn-lg btn-primary rounded-pill border-0"> <span class="text-white">  Add to Wishlist <i class="bi bi-heart-fill float-right"></i> </span></button>
+                            </form>
                         </div>
-                        <div class="col mt-3">
-                            
-                            <button class="btn-lg btn-primary rounded-pill border-0"> Request More Info  <i class="bi bi-info-square float-right"></i></button>
+
+                        <?php
+                        if ($data['sale_type'] == 'Sale') { ?>
+                            <div class="col mt-3">
+                            <a href="../php/placeOrder.php?id=<?php echo $data['product_id'] ?> ">
+                            <button class="btn-lg btn-primary rounded-pill border-0"> Place Order </button>
+                            </a>
                         </div>
+                            <?php                        }
+                        ?>
+                        
+                        
                         <?php
                         if ($data['sale_type']=='Auction'){
                             echo '
