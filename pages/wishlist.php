@@ -198,6 +198,7 @@ if (isset($_GET['success'])) {
                                             <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
                                                 <i class='bi bi-trash-fill p-3'></i>
                                             </button>
+                                            
                                         </form>
                                     </div>                                    
                                     <div>". ""
