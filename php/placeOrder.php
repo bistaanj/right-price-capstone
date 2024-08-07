@@ -6,6 +6,7 @@ include '../includes/checkSession.php';
 
 try {
     $req_product = $_GET['id'];
+   
     $querry = "SELECT * from tbl_products where product_id = ?";
     $bind_statement = $connect->prepare($querry);
     $bind_statement->bind_param("i", $req_product);
@@ -24,7 +25,8 @@ try {
 
 
     }
-} catch (Exception $e) {
+}
+ catch (Exception $e) {
     header('Location: ../pages/error.php');
 
 }

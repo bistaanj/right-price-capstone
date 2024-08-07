@@ -98,7 +98,7 @@ $products = $_SESSION['user_orders'];
                                             data-product-id="<?php echo $data['product_id']; ?>" 
                                             data-buyer-id="<?php echo $data['buyer_id']; ?>" 
                                             data-transaction-type="DISPATCHED" >
-                                            Order Dispatched
+                                            DISPATCH ORDER
                                         </button> 
                                         <button class="btn btn-danger btn-rounded btn-min-width-padding text-white"
                                             data-bs-toggle="modal"

@@ -141,9 +141,9 @@ if (isset($_SESSION['current_product'])) {
                         <?php
                         if ($data['sale_type'] == 'Sale') { ?>
                             <div class="col mt-3">
-                                <form action="../php/placeOrder.php?id=<?php echo $data['product_id'] ?>">
+                                <a href="../php/placeOrder.php?id=<?php echo $data['product_id'];?>">
                                     <button type='submit' class="btn-lg btn-warning rounded-pill border-0" style='width:170px;'> <span class="text-white">  Place Order </span> </button>
-                                </form>
+                                </a>
                             
                         </div>
                             <?php                        }

@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <script>
-        function confirmDelete(form) {
+        function confirmRemove(form) {
             swal({
                 title: "Are you sure?",
                 text: "This product will be removed from your wishlist.",
@@ -31,7 +31,7 @@
         }
     </script>
     <script>
-        function confirmCancel(form) {
+        function confirmCancle(form) {
             swal({
                 title: "Are you sure?",
                 text: "Your order has already been processed. You might be liable for cancellation fee.",
@@ -53,7 +53,7 @@
 <body>
     <?php include "../includes/navigation.php" ?>    
 <main class ='d-flex justify-content-center align-items-start'>
-<div class="mt-5 w-50 ">
+<div class="mt-5 w-75 ">
 
 <?php
 if (isset($_GET['success'])) {
@@ -87,7 +87,7 @@ if (isset($_GET['success'])) {
             // get data 
             $sql = "SELECT wi.wishlist_item_id, wi.product_id, 
             wi.product_status, 
-            p.product_name, p.product_price, p.product_unit, p.product_image, p.sale_type, p.product_status
+            p.product_name, p.product_price, p.product_unit, p.product_image, p.sale_type, p.product_status as product_presence
                     FROM tbl_wishlist_item wi
                     JOIN tbl_products p ON wi.product_id = p.product_id
                     WHERE wi.user_id = $user_id";
@@ -95,7 +95,7 @@ if (isset($_GET['success'])) {
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    if ($row['product_status'] == 'UNORDERED' && $row['sale_type'] == 'Sale') {
+                    if ($row['product_status'] == 'UNORDERED' && $row['sale_type'] == 'Sale' && $row['product_presence'] != 'Deleted' ) {
                         echo "<tr>
                             <td class='align-middle'>
                                 <div class='d-flex align-items-center'>
@@ -116,14 +116,14 @@ if (isset($_GET['success'])) {
                                     <div>
                                         <form action='../php/delete_wishlist_item.php' method='post' class='mb-2'>
                                             <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                            <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
+                                            <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmRemove(this.form)'>
                                                 <i class='bi bi-trash-fill p-3'></i>
                                             </button>
                                         </form>
                                     </div>
                                     <div>
-                                        <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "> 
-                                            <button 'class='btn btn-primary' style='width:120px;'>
+                                        <a href='../php/getProductinfo.php?id=".$row['product_id']."'> 
+                                            <button class='btn btn-primary' style='width:120px;'>
                                                 View Product
                                             </button>
                                         </a>
@@ -138,7 +138,7 @@ if (isset($_GET['success'])) {
                                 </div>
                             </td>
                           </tr>";
-                    } elseif ($row['product_status'] == 'ORDERED' && $row['sale_type'] == 'Sale') {
+                    } elseif ($row['product_status'] == 'ORDERED' && $row['sale_type'] == 'Sale' && $row['product_presence'] != 'Deleted') {
                         echo "<tr>
                             <td class='align-middle'>
                                 <div class='d-flex align-items-center'>
@@ -159,7 +159,7 @@ if (isset($_GET['success'])) {
                                 <div>
                                     <form action='../php/cancleOrder.php' method='POST' class='mb-2'>
                                         <input type='hidden' name='product_id' value='" . $row['product_id'] . "'>
-                                        <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
+                                        <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmCancle(this.form)'>
                                                 <i class='bi bi-x-circle p-3'></i>
                                             </button>
                                     </form> 
@@ -179,7 +179,7 @@ if (isset($_GET['success'])) {
                                 </div>
                             </td>
                         </tr>";
-                    } elseif ($row['sale_type'] == 'Auction') {
+                    } elseif ($row['sale_type'] == 'Auction' && $row['product_presence'] != 'Deleted') {
                         echo "<tr>
                             <td class='align-middle'>
                                 <div class='d-flex align-items-center'>
@@ -200,33 +200,40 @@ if (isset($_GET['success'])) {
                                     <div>
                                         <form action='../php/delete_wishlist_item.php' method='post' class='mb-2'>
                                             <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                            <button type='button' class='btn btn-danger btn-sm d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
+                                            <button type='button' class='btn btn-danger d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
                                                 <i class='bi bi-trash-fill p-3'></i>
                                             </button>
                                             
                                         </form>
                                     </div>                                    
-                                    <div>" . ""
-                            // <div>
-                            //     <p>You can make an offer from</p>
-                            // </div>
-                            // <div>
-                            . " <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
-                                                <button class='btn btn-primary' style='width:120px;'>
-                                                    View Product 
-                                                </button>
-                                            </a>
-                                        </div>
+                                    <div class='ml-2'>
+                                        <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
+                                            <button class='btn btn-primary ' style='width:120px;'>
+                                                View Product 
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
-                                
                             </td>
                           </tr>";
-                    } elseif ($row['product_status'] == 'Deleted') {
+                    } elseif ($row['product_presence'] == 'Deleted') {
                         echo "<tr class='align-middle'>
-                                <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
-                                <td>$" . number_format($row['product_price'], 2) . "</td>
-                                <td class='text-center'>Product Not Available</td>
+                                <td class='align-middle'>
+                                <div class='d-flex align-items-center'>
+                                    <img src='../images/" . $row['product_image'] . "' alt='Product Image' class='img-thumbnail' style='width: 100px; height: auto; margin-right: 10px;'> 
+                                    <div>
+                                        <h5 class='mb-0'>" . $row['product_name'] . "</h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class='align-middle text-center'>
+                                <div> 
+                                    <h6> Was </h6>
+                                    <h5 class='mb-0'>$" . number_format($row['product_price'], 2) . "</h5>
+                                    <small>per " . $row['product_unit'] . "</small>
+                                </div>
+                            </td>
+                                <td class='text-center'>Product is removed by the seller</td>
                               </tr>";
                     }
                 }

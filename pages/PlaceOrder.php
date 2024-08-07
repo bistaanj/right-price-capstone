@@ -46,24 +46,24 @@ if (isset($_SESSION['checkout_product'])) {
                                     <label for="inputQuantity">Quantity</label>
                                     <input type="number" min="1" name="quantity" class="form-control" id="inputQuantity" placeholder="Quantity" required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputAddressDetails"><strong>Address Details</strong></label>
-                                </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6">
+                                <label for="inputAddressDetails"><strong>Address Details</strong></label>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="inputAddress">Address</label>
                                 <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6">
                                 <label for="inputAddress2">Address 2</label>
-                                <input type="text" class="form-control" name="address_secondary" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                <input type="text" class="form-control" name="address_secondary" id="inputAddress2" placeholder="Apartment, studio, or floor" required>
                             </div>
-                            <div class="form-row">
+                            <div class="form-row col-md-8">
                                 <div class="form-group col-md-4">
                                     <label for="inputCity">City</label>
                                     <input type="text" name="city" class="form-control" id="inputCity" required>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-5">
                                     <label for="inputState">State</label>
                                     <select id="inputState" class="form-control" name="state" required>
                                         <option value="AB">Alberta</option>
