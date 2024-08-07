@@ -45,39 +45,40 @@ $products = $_SESSION['user_products'];
         <tbody>
             <?php if (!empty($products)) {
                 foreach ($products as $data) {
+                    // Check if the product status is not "Deleted"
+                    if ($data['product_status'] !== 'Deleted'):
             ?>
                 <tr>
-                    <th scope="row" class='text-center align-middle'><?php echo $data['product_id']; ?></th>
+                    <th scope="row" class='text-center align-middle'><?php echo htmlspecialchars($data['product_id']); ?></th>
                     <td>
                         <div class="container d-flex justify-content-center">
-                            <img src="../images/<?php echo $data['product_image'] ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image">
+                            <img src="../images/<?php echo htmlspecialchars($data['product_image']) ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image">
                         </div>
                         <div class="container-fluid text-center">
-                            <?php echo $data['product_name']; ?>
+                            <?php echo htmlspecialchars($data['product_name']); ?>
                         </div>
                     </td>
-                    <td class='text-center align-middle'><?php echo $data['product_price']; ?></td>
+                    <td class='text-center align-middle'><?php echo htmlspecialchars($data['product_price']); ?></td>
                     <td class='text-center align-middle'>
                         <div>
-                            <?php echo $data['sale_type']; ?>
+                            <?php echo htmlspecialchars($data['sale_type']); ?>
                             <br>
                             <?php 
-                             if ($data['sale_type']=='Auction'){
-                                echo isset($data['total_offer']) && $data['total_offer']>0 ? $data['total_offer'] . "  bidder" : "No bidder";
-                                
-                            }  ?> 
-                            
+                             if ($data['sale_type'] == 'Auction'){
+                                echo isset($data['total_offer']) && $data['total_offer'] > 0 ? htmlspecialchars($data['total_offer']) . "  bidder" : "No bidder";
+                            }  
+                            ?> 
                         </div>
                     </td>
                     <td class='text-center align-middle'>
-                        <?php echo $data['product_status']; ?>
+                        <?php echo htmlspecialchars($data['product_status']); ?>
                     </td>
                     <td class="align-middle">
                         <div class="d-flex flex-wrap justify-content-center align-items-center">
                         <?php
                             if ($data['total_offer'] == null) { ?>
                             <div>
-                                <a href="sell_product.php?id=<?php echo $data['product_id']; ?>" class="btn btn-warning btn-rounded btn-min-width-padding">Edit</a>
+                                <a href="sell_product.php?id=<?php echo htmlspecialchars($data['product_id']); ?>" class="btn btn-warning btn-rounded btn-min-width-padding">Edit</a>
                             </div>
                             <?php } ?>
                             <?php if ($data['sale_type'] == 'Sale') { ?>                                
@@ -85,7 +86,7 @@ $products = $_SESSION['user_products'];
                                     <button class="btn btn-primary btn-rounded btn-min-width-padding"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deactiveModal"
-                                        data-product-id="<?php echo $data['product_id']; ?>"
+                                        data-product-id="<?php echo htmlspecialchars($data['product_id']); ?>"
                                         data-transaction="deactivate">
                                         Change Status
                                     </button>
@@ -93,15 +94,15 @@ $products = $_SESSION['user_products'];
                             <?php } ?>
                             <?php
                              $today = new DateTime();
-                             $product_added = new DateTime($data['product_added']) ;
+                             $product_added = new DateTime($data['product_added']);
                              $interval = $today->diff($product_added);
-                            if ($data['sale_type'] == 'Auction' && $interval->days > 30  && $data['product_status']=='ACTIVE') { 
+                            if ($data['sale_type'] == 'Auction' && $interval->days > 30  && $data['product_status'] == 'ACTIVE') { 
                                 ?>
                                 <div>
                                     <button class="btn btn-success btn-rounded btn-min-width-padding"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#auctionModal"
-                                                    data-product-id="<?php echo $data['product_id']; ?>"
+                                                    data-product-id="<?php echo htmlspecialchars($data['product_id']); ?>"
                                                     data-transaction="completeAuction">Complete Auction</button>
                                 </div>
                             <?php } ?>
@@ -109,7 +110,7 @@ $products = $_SESSION['user_products'];
                                 <button class="btn btn-danger btn-rounded btn-min-width-padding"
                                     data-bs-toggle="modal"
                                     data-bs-target="#deleteModal"
-                                    data-product-id="<?php echo $data['product_id']; ?>"
+                                    data-product-id="<?php echo htmlspecialchars($data['product_id']); ?>"
                                     data-transaction="delete">
                                     Delete
                                 </button>
@@ -118,6 +119,40 @@ $products = $_SESSION['user_products'];
                     </td>
                 </tr>
             <?php
+                    else:
+                        // Optionally, display something if the status is "Deleted"
+                        ?>
+                        <tr>
+                            <th scope="row" class='text-center align-middle'><?php echo htmlspecialchars($data['product_id']); ?></th>
+                            <td>
+                                <div class="container d-flex justify-content-center">
+                                    <img src="../images/<?php echo htmlspecialchars($data['product_image']) ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image">
+                                </div>
+                                <div class="container-fluid text-center">
+                                    <?php echo htmlspecialchars($data['product_name']); ?>
+                                </div>
+                            </td>
+                            <td class='text-center align-middle'><?php echo htmlspecialchars($data['product_price']); ?></td>
+                            <td class='text-center align-middle'>
+                                <div>
+                                    <?php echo htmlspecialchars($data['sale_type']); ?>
+                                    <br>
+                                    <?php 
+                                     if ($data['sale_type'] == 'Auction'){
+                                        echo isset($data['total_offer']) && $data['total_offer'] > 0 ? htmlspecialchars($data['total_offer']) . "  bidder" : "No bidder";
+                                    }  
+                                    ?> 
+                                </div>
+                            </td>
+                            <td class='text-center align-middle'>
+                                <?php echo htmlspecialchars($data['product_status']); ?>
+                            </td>
+                            <td class="align-middle text-center">
+                                <p class="text-danger">Product Not Available</p>
+                            </td>
+                        </tr>
+                        <?php
+                    endif;
                 }
             }
             ?>
@@ -164,10 +199,9 @@ $products = $_SESSION['user_products'];
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal for complete Auction -->
-<div class="modal fade" id="auctionModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <!-- Modal for complete Auction -->
+    <div class="modal fade" id="auctionModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

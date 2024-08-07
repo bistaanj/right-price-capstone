@@ -11,8 +11,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
-
-
     <script>
         function confirmDelete(form) {
             swal({
@@ -71,44 +69,43 @@
             // connection
             require_once '../php/connection.php'; 
 
-            
             $user_id = $_SESSION['user_id']; // get session id
 
             // get data 
-            $sql = "SELECT wi.wishlist_item_id, wi.product_id, p.product_name, p.product_price, p.product_image
+            $sql = "SELECT wi.wishlist_item_id, wi.product_id, p.product_name, p.product_price, p.product_image, p.product_status
                     FROM tbl_wishlist_item wi
                     JOIN tbl_products p ON wi.product_id = p.product_id
                     WHERE wi.user_id = $user_id";
             $result = $connect->query($sql);
 
             if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr class='align-middle' >
-                            <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
-                            <td>$" . number_format($row['product_price'], 2) . "</td>
-                            <td class ='d-flex flex-wrap justify-content-center align-items-center'>
-                                <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
-                                    <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding ' onclick='confirmDelete(this.form)'>Delete Item </button>
-
+                while ($row = $result->fetch_assoc()) {
+                    if ($row['product_status'] == 'Deleted') {
+                        echo "<tr class='align-middle'>
+                                <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
+                                <td>$" . number_format($row['product_price'], 2) . "</td>
+                                <td class='text-center'>Product Not Available</td>
+                              </tr>";
+                    } else {
+                        echo "<tr class='align-middle'>
+                                <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
+                                <td>$" . number_format($row['product_price'], 2) . "</td>
+                                <td class='d-flex flex-wrap justify-content-center align-items-center'>
+                                    <form action='../php/delete_wishlist_item.php' method='post' style='display:inline;'>
+                                        <input type='hidden' name='wishlist_item_id' value='" . $row['wishlist_item_id'] . "'>
+                                        <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' onclick='confirmDelete(this.form)'>Delete Item</button>
+                                    </form>
                                     <a style='color:white; text-decoration:none' href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
-                                    <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>                                    
-                                        View Product 
-                                         </button>
+                                        <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding'>View Product</button>
                                     </a>
-
                                     <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' data-bs-toggle='modal'
                                         data-bs-target='#orderModal'
-                                        data-product-id= '" . $row['product_id'] . "' >                                    
-                                        Place Order 
-                                        </button>
-
-                                    
-                                   
-                                   
-                                </form>
-                            </td>
-                          </tr>";
+                                        data-product-id='" . $row['product_id'] . "'>
+                                        Place Order
+                                    </button>
+                                </td>
+                              </tr>";
+                    }
                 }
             } else {
                 echo "<tr><td colspan='3' class='text-center'>No items in wishlist</td></tr>";
@@ -117,35 +114,29 @@
             // Close connection
             $connect->close();
             ?>
-            <button type='button' class='btn btn-primary btn-rounded btn-min-width-padding' data-bs-toggle='modal'
-                                        data-bs-target='#orderModal'
-                                        data-product-id= '' >                                    
-                                        Place Order 
-                                        </button>
-
         </tbody>
     </table>
 </div>
 
-
 <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h3>
-                </div>
-                <div class="modal-body">
-                    <p class="p-2">Would you like to place an order?</p>
-                </div>
-                <div class="modal-footer d-flex flex-column">
-                    <form id='deleteForm' action="" method="POST">
-                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
-                        <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, place oder</button>
-                    </form>
-                </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h3>
+            </div>
+            <div class="modal-body">
+                <p class="p-2">Would you like to place an order?</p>
+            </div>
+            <div class="modal-footer d-flex flex-column">
+                <form id='deleteForm' action="" method="POST">
+                    <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
+                    <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, place order</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
 <!-- Script to send data to modal -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -154,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Extract data from data-* attributes
         const productId = button.getAttribute('data-product-id');
-        const transactionType = button.getAttribute('data-transaction');
 
         // Get the target modal ID
         const modalId = button.getAttribute('data-bs-target').substring(1); // Remove the '#' character
