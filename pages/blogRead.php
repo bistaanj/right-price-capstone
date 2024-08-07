@@ -51,19 +51,21 @@
 </header>
 <main class="container mt-4 flex-grow-1">
     <?php
-    //get id blog
-    $blog_id = $_GET['id'];
+    // get id blog
+    $blog_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-    //database 
+    // database 
     require_once '../php/connection.php';
 
     // sql
-    //$sql = "SELECT * FROM tbl_blog WHERE blog_id = $blog_id";
     $sql = "SELECT b.*, CONCAT(u.fname, ' ', u.lname) AS author_name 
-    FROM tbl_blog b
-    JOIN tbl_user u ON b.blog_author = u.user_id
-    WHERE b.blog_id = $blog_id";
-    $result = $connect->query($sql);
+            FROM tbl_blog b
+            JOIN tbl_user u ON b.blog_author = u.user_id
+            WHERE b.blog_id = ?";
+    $stmt = $connect->prepare($sql);
+    $stmt->bind_param('i', $blog_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result === false) {
         echo "<div class='alert alert-danger'>Error en la consulta SQL: " . $connect->error . "</div>";
@@ -88,6 +90,7 @@
     }
 
     // close connection
+    $stmt->close();
     $connect->close();
     ?>
     

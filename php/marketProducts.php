@@ -1,5 +1,4 @@
 <?php
-
 require_once '../php/connection.php';
 include '../includes/checkSession.php';
 
@@ -22,13 +21,15 @@ try {
         }
     }
 
+    // Store product information in session
     $_SESSION['product_info'] = $products_info;
+
+    // Redirect to market page
     header('Location: ../pages/market.php');
     exit();
 
-
-
 } catch (Exception $e) {
-    echo "Error: " . $e;
+    // Handle exception and display sanitized error message
+    echo "Error: " . htmlspecialchars($e->getMessage());
 }
 ?>

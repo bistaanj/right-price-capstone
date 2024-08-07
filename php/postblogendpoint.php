@@ -1,12 +1,11 @@
 <?php
-
 require_once "connection.php";
 
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
-        $title = $_POST['title'];
-        $content = $_POST['blog_content'];
+        $title = htmlspecialchars($_POST['title']);
+        $content = htmlspecialchars($_POST['blog_content']);
         $user = $_SESSION['user_id'];
         $current_date = date("Y/m/d");
 
@@ -25,14 +24,14 @@ try {
             $uploadOk = 0;
         }
 
-        // verify is the file already exist
+        // verify if the file already exists
         if (file_exists($target_file)) {
             echo "Sorry, file already exists.";
             $uploadOk = 0;
         }
 
         // size of the file
-        if ($_FILES["image"]["size"] > 5000000) { // 5MB máx
+        if ($_FILES["image"]["size"] > 5000000) { // 5MB max
             echo "Sorry, your file is too large.";
             $uploadOk = 0;
         }
@@ -49,13 +48,14 @@ try {
         // upload the file
         } else {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                $picture = $target_file; // safe the root of the file
+                $picture = htmlspecialchars($target_file); // sanitize the file path
                 $query = "INSERT INTO tbl_blog (blog_author, blog_published_date, blog_title, blog_picture, blog_contents) VALUES (?, ?, ?, ?, ?)";
                 $bind_statement = $connect->prepare($query);
                 $bind_statement->bind_param("issss", $user, $current_date, $title, $picture, $content);
                 $result = $bind_statement->execute();
                 if ($result) {
                     header("Location: ../pages/dashboard.php");
+                    exit();
                 } else {
                     echo "Error: " . $connect->error;
                 }
@@ -65,7 +65,6 @@ try {
         }
     }
 } catch (Exception $e) {
-    echo $e->getMessage();
+    echo "Exception: " . htmlspecialchars($e->getMessage());
 }
-
 ?>

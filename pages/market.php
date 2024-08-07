@@ -9,7 +9,6 @@
     <title>Right Price Dashboard</title>
     <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <?php include '../includes/scripts.php' ?>
-   
 </head>
 
 <body>
@@ -30,35 +29,54 @@
             </form>
         </div>
         <div class="row">
-        <div class="product-container">
-            <div class="product-grid">
+            <div class="product-container">
+                <div class="product-grid">
 
-            <!-- Product Card Starts here -->
+                <!-- Product Card Starts here -->
 
-                    <?php
-                    if (count($product_info) > 0):
-                        foreach ($product_info as $data):
+                <?php
+                if (count($product_info) > 0):
+                    foreach ($product_info as $data):
+                        // Check if the product status is not "Deleted"
+                        if ($data['product_status'] !== 'Deleted'):
                             ?>                
                             <div class="product-card">
                                 <div class="product-image">
                                     <img src="../images/<?php echo $data['product_image']?>" alt="">
                                 </div>
                                 <div class="product-info">
-                                    <h3> <?php echo $data['product_name']; ?> </h3>
-                                    <p> <?php echo $data['product_price']; ?>  /  <?php echo $data['product_unit']; ?> </p>
-                                    <a href="../php/getProductinfo.php?id=<?php echo $data['product_id']; ?> ">
+                                    <h3><?php echo htmlspecialchars($data['product_name']); ?></h3>
+                                    <p><?php echo htmlspecialchars($data['product_price']); ?> / <?php echo htmlspecialchars($data['product_unit']); ?></p>
+                                    <a href="../php/getProductinfo.php?id=<?php echo htmlspecialchars($data['product_id']); ?>">
                                         <button class="btn btn-primary btn-rounded">View Product</button>
                                     </a>
                                     <form action="../php/add_wishlist_item.php" method="POST" style="display:inline;">
-                                        <input type="hidden" name="product_id" value="<?php echo $data['product_id']; ?>">
+                                        <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($data['product_id']); ?>">
                                         <button type="submit" class="btn btn-secondary btn-rounded">Add to Wishlist</button>
                                     </form>
                                 </div>
                             </div>
                             <?php
-                        endforeach;
-                    endif;
-                    ?>
+                        else:
+                            ?>                
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <h3><?php echo htmlspecialchars($data['product_name']); ?></h3>
+                                    <p><?php echo htmlspecialchars($data['product_price']); ?> / <?php echo htmlspecialchars($data['product_unit']); ?></p>
+                                    <a href="../php/getProductinfo.php?id=<?php echo htmlspecialchars($data['product_id']); ?>">
+                                        <button class="btn btn-primary btn-rounded">View Product</button>
+                                    </a>
+                                    <p class="text-danger">Product Not Available</p>
+                                </div>
+                            </div>
+                            <?php
+                        endif;
+                    endforeach;
+                endif;
+                ?>
             
                 </div>
             </div>

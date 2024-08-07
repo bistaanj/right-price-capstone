@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
     <script>
         function confirmDelete(form) {
             swal({
@@ -83,7 +84,9 @@ if (isset($_GET['success'])) {
             $user_id = $_SESSION['user_id']; // get session id
             
             // get data 
-            $sql = "SELECT wi.wishlist_item_id, wi.product_id, wi.product_status, p.product_name, p.product_price, p.product_unit, p.product_image, p.sale_type
+            $sql = "SELECT wi.wishlist_item_id, wi.product_id, 
+            wi.product_status, 
+            p.product_name, p.product_price, p.product_unit, p.product_image, p.sale_type, p.product_status
                     FROM tbl_wishlist_item wi
                     JOIN tbl_products p ON wi.product_id = p.product_id
                     WHERE wi.user_id = $user_id";
@@ -218,6 +221,12 @@ if (isset($_GET['success'])) {
                                 
                             </td>
                           </tr>";
+                    } elseif ($row['product_status'] == 'Deleted') {
+                        echo "<tr class='align-middle'>
+                                <td><img src='../uploads/" . $row['product_image'] . "' alt='Product Image' class='product-image img-thumbnail'> " . $row['product_name'] . "</td>
+                                <td>$" . number_format($row['product_price'], 2) . "</td>
+                                <td class='text-center'>Product Not Available</td>
+                              </tr>";
                     }
                 }
             } else {
@@ -240,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Extract data from data-* attributes
         const productId = button.getAttribute('data-product-id');
-        const transactionType = button.getAttribute('data-transaction');
 
         // Get the target modal ID
         const modalId = button.getAttribute('data-bs-target').substring(1);

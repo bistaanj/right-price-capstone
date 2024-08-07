@@ -6,8 +6,8 @@ try{
     $product_id = $_GET['id'];
     // To delete product
     if($transaction_type=="delete"){
-        $querry = "DELETE from tbl_products where product_id = ?";
-        $bind_statement = $connect->prepare($querry);
+        $query = "UPDATE tbl_products SET product_status = 'Deleted' WHERE product_id = ?";
+        $bind_statement = $connect->prepare($query);
         $bind_statement->bind_param("i", $product_id);
         $bind_statement->execute();
         
