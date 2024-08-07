@@ -10,6 +10,7 @@ try {
     $category = $_POST["product_category"];
     $price = $_POST["price"];
     $unit = $_POST["unit"];
+    $short_description = $_POST["short_description"];
     $description = $_POST["description"];
     $addedDate = date("Y-m-d");
     $product_status = "Active";
@@ -26,7 +27,7 @@ try {
     $stmt = $connect->prepare($query);
 
     // Bind parameters
-    $stmt->bind_param("issidsssss", $user_id, $name, $unit, $category, $price, $imageLink, $description, $addedDate, $product_status, $saleType);
+    $stmt->bind_param("issidssssss", $user_id, $name, $unit, $category, $price, $imageLink, $description, $short_description, $addedDate, $product_status, $saleType);
 
     // Execute the query
     if ($stmt->execute()) {

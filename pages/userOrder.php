@@ -44,8 +44,9 @@ $products = $_SESSION['user_orders'];
                 <th scope="col" class='text-center align-middle'>Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <?php if (!empty($products)) {
+        <tbody>            
+                <?php
+                 if (!empty($products)){
                 foreach ($products as $index=> $data) {
                     ?>
                         <tr>
@@ -131,11 +132,21 @@ $products = $_SESSION['user_orders'];
                             </td>
                         </tr>
                     <?php
-                }
+                } 
+                ?>
+                
+
+                <?php
             }
             ?>
         </tbody>
     </table>
+    <?php if (empty($products)) {
+                echo "
+                <div class='container'>
+                    <h2 class='text-center'> You do not have any orders yet.</h2>
+                </div>"; }
+                ?>
 
     <!-- Modals -->
             <!-- try -->

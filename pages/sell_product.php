@@ -8,58 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        .form-group {
-            margin-bottom: 15px;
-            
-        }
-
-        .form-control {
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            padding: 8px 12px; /* Reduced padding */
-            width: 60%;
-            box-sizing: border-box;
-            font-size: 14px; /* Adjusted font size */
-        }
-
-        textarea.form-control {
-            border-radius: 10px;
-            resize: none;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 30px;
-            width: 60%;
-            font-size: 16px;
-        }
-
-        .form-group.radio-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group.radio-group .radio-options {
-            display: flex;
-            justify-content: flex-start;
-            margin-top: 10px;
-        }
-
-        .form-group.radio-group .radio-options div {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-        }
-
-        .form-group.radio-group .radio-options label {
-            margin-left: 5px;
-            margin-bottom: 0;
-        }
-    </style>
+    
     <script>
         function validateForm() {
             let price = document.getElementById("price").value;
@@ -112,7 +61,7 @@
         
         <form action="<?php echo isset($product) ? '../php/updateproduct.php' : '../php/insertproduct.php'; ?>" method="post" enctype="multipart/form-data" onsubmit="return validateForm() && validateFile()">
             <?php if (isset($product)) { ?>
-                <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
             <?php } ?>
             <div class="form-group radio-group">
                 <label for="sales_type">Sales Type</label>
@@ -142,21 +91,29 @@
                     <option value="2" <?php echo isset($product) && $product['product_category'] == '2' ? 'selected' : ''; ?>>Fertilizers</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" id="price" name="price" class="form-control" required value="<?php echo isset($product) ? $product['product_price'] : ''; ?>">
-                <label for="unit">Per</label>
-                <input type="text" id="unit" name="unit" class="form-control" required value="<?php echo isset($product) ? $product['product_unit'] : ''; ?>">
-            </div>
+            
+                <div class="form-group ">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" class="form-control" required value="<?php echo isset($product) ? $product['product_price'] : ''; ?>">
+                </div>
+                <div class="form-group ">
+                    <label for="unit">Per</label>
+                    <input type="text" id="unit" name="unit" class="form-control" required value="<?php echo isset($product) ? $product['product_unit'] : ''; ?>">
+                </div>
+            
             <div class="form-group">
                 <label for="product_image">Product Image</label>
                 <?php if (isset($product) && !empty($product['product_image'])) { ?>
-                    <div>
-                        <img src="../uploads/<?php echo $product['product_image']; ?>" alt="Product Image" width="150">
-                    </div>
-                    <label for="product_image">Change Image (optional)</label>
+                        <div>
+                            <img src="../uploads/<?php echo $product['product_image']; ?>" alt="Product Image" width="150">
+                        </div>
+                        <label for="product_image">Change Image (optional)</label>
                 <?php } ?>
                 <input type="file" id="product_image" name="product_image" class="form-control" <?php echo !isset($product) ? 'required' : ''; ?>>
+            </div>
+            <div class="form-group">
+                <label for="short_description">Short Description</label>
+                <textarea id="short_description" name="short_description" class="form-control" rows="2" required><?php echo isset($product) ? $product['product_short_description'] : ''; ?></textarea>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
