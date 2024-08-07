@@ -49,6 +49,7 @@ CREATE TABLE `tbl_products` (
     `product_price` FLOAT NOT NULL,
     `product_unit` VARCHAR(10) NOT NULL,
     `product_image` VARCHAR(255) NOT NULL,
+    `product_short_image` VARCHAR(255) NOT NULL,
     `product_description` VARCHAR(1000) NOT NULL,
     `product_added` DATE NOT NULL,
     `product_status` VARCHAR(255) NOT NULL,

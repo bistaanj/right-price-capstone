@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-<?php include "../includes/navigation.php"; ?>
+
+    <?php include "../includes/navigation.php"; ?>
+<main>
 
 <?php 
 session_start();
@@ -251,6 +253,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+</main>
 <?php include '../includes/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

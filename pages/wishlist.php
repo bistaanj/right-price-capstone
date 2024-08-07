@@ -51,8 +51,9 @@
 </head>
 
 <body>
-<?php include "../includes/navigation.php" ?>    
-<div class="mt-5 w-50 align-self-center">
+    <?php include "../includes/navigation.php" ?>    
+<main class ='d-flex justify-content-center align-items-start'>
+<div class="mt-5 w-50 ">
 
 <?php
 if (isset($_GET['success'])) {
@@ -205,12 +206,12 @@ if (isset($_GET['success'])) {
                                             
                                         </form>
                                     </div>                                    
-                                    <div>". ""
-                                        // <div>
-                                        //     <p>You can make an offer from</p>
-                                        // </div>
-                                        // <div>
-                                            ." <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
+                                    <div>" . ""
+                            // <div>
+                            //     <p>You can make an offer from</p>
+                            // </div>
+                            // <div>
+                            . " <a href='../php/getProductinfo.php?id=" . $row['product_id'] . "'>
                                                 <button class='btn btn-primary' style='width:120px;'>
                                                     View Product 
                                                 </button>
@@ -267,6 +268,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+</main>
 <?php include '../includes/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
