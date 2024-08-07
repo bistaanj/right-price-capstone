@@ -28,35 +28,42 @@
             <?php
                 require_once '../php/connection.php';
 
+                $search = isset($_GET['search']) ? $_GET['search'] : '';
+                $search = "%$search%";
+
                 //sql
-                $sql = "SELECT b.blog_author, b.blog_published_date, b.blog_title, b.blog_contents, b.blog_id,
-                               u.fname, u.lname 
+                $sql = "SELECT b.blog_author, b.blog_published_date, b.blog_title, b.blog_contents, b.blog_id, 
+                            u.fname, u.lname 
                         FROM tbl_blog b
                         JOIN tbl_user u ON b.blog_author = u.user_id
-                        WHERE b.blog_contents LIKE '%$search%'";
-                $result = $connect->query($sql);
+                        WHERE b.blog_contents LIKE ?";
+                $stmt = $connect->prepare($sql);
+                $stmt->bind_param('s', $search);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
                 if ($result->num_rows > 0) {
                     //  HTML
                     while($row = $result->fetch_assoc()) {
-                        $blog_contents_preview = substr($row["blog_contents"], 0, 160) . '...';
+                        $blog_contents_preview = htmlspecialchars(substr($row["blog_contents"], 0, 160) . '...');
                         echo '<div class="col-md-3 mb-5">';
                         echo '<div class="blog-card p-4 rounded">';
                         echo '<p>' . $blog_contents_preview . '</p>';
-                        echo '<a href="blogRead.php?id=' . $row["blog_id"] . '">...Read More</a>';
+                        echo '<a href="blogRead.php?id=' . htmlspecialchars($row["blog_id"]) . '">...Read More</a>';
                         echo '<hr>';
                         echo '<p class="author-date">';
-                        echo '<span>' . $row["fname"] . ' ' . $row["lname"] . '</span><br>';
-                        echo '<span>' . $row["blog_published_date"] . '</span>';
+                        echo '<span>' . htmlspecialchars($row["fname"] . ' ' . $row["lname"]) . '</span><br>';
+                        echo '<span>' . htmlspecialchars($row["blog_published_date"]) . '</span>';
                         echo '</p>';
                         echo '</div>';
-                        echo '<h5 class="text-center mt-2">' . $row["blog_title"] . '</h5>';
+                        echo '<h5 class="text-center mt-2">' . htmlspecialchars($row["blog_title"]) . '</h5>';
                         echo '</div>';
                     }
                 } else {
-                    echo "<tr><td colspan='3' class='text-center'>No results found</td></tr>";
+                    echo "<div class='text-center'>No results found</div>";
                 }
                 $connect->close();
+
             ?>
         </div>
     </main>
