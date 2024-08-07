@@ -240,10 +240,34 @@ button[type="submit"] {
 }
 
 .search-icon {
-    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; 
+    height: 30px; 
+    cursor: pointer;
+}
+.search-icon1 {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; 
+    height: 30px; 
+    cursor: pointer;
 }
 
-.button-search{
+.button-search:hover .search-icon1 {
+    transform: scale(1.2); /* Optional: Add a hover effect */
+}
+
+.search-bar img {
+    max-width: 30px; 
+    max-height: 30px; 
+}
+
+.button-search {
     width: 25px;
     height: 25px;
     border: none;
@@ -253,7 +277,6 @@ button[type="submit"] {
     background-position: center;
     cursor: pointer;
     background-color: transparent !important;
-
 }
 
 
