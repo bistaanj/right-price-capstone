@@ -1,3 +1,4 @@
+/* Base styles */
 html, body {
     height: 100%;
     margin: 0;
@@ -44,36 +45,35 @@ nav ul {
 nav ul li {
     margin: 0 15px;
     text-align: center;
-    transition: transform 0.2s ease-in-out; 
+    transition: transform 0.2s ease-in-out;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #090909; 
+    color: #090909;
     font-size: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    transition: transform 0.2s ease-in-out; 
+    transition: transform 0.2s ease-in-out;
 }
 
 nav ul li a:hover {
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
 
 nav ul li a i,
 nav ul li a svg {
     font-size: 32px;
     margin-bottom: 5px;
-    color: #090909; 
-    transition: transform 0.2s ease-in-out; 
+    color: #090909;
+    transition: transform 0.2s ease-in-out;
 }
 
 nav ul li a svg {
     margin-bottom: 18px;
 }
-
 
 .overview-heading h2 {
     font-weight: bold;
@@ -236,14 +236,39 @@ button[type="submit"] {
     justify-content: center;
     padding: 10px;
     border-radius: 0 25px 25px 0;
-    color: #000; 
+    color: #000;
 }
 
 .search-icon {
-    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
-.button-search{
+.search-icon1 {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.button-search:hover .search-icon1 {
+    transform: scale(1.2);
+}
+
+.search-bar img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.button-search {
     width: 25px;
     height: 25px;
     border: none;
@@ -253,9 +278,7 @@ button[type="submit"] {
     background-position: center;
     cursor: pointer;
     background-color: transparent !important;
-
 }
-
 
 .product-container {
     display: flex;
@@ -269,7 +292,6 @@ button[type="submit"] {
     gap: 20px;
     padding: 20px;
     background-color: #E3E6E6;
-    /* changed the bg color */
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -325,14 +347,14 @@ button[type="submit"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Add spacing between buttons */
+    gap: 10px;
     margin-top: 10px;
 }
 
 .product-info .btn {
     text-align: center;
-    width: auto; /* Ensure buttons take up their content width */
-    margin: 0; /* Remove extra margins */
+    width: auto;
+    margin: 0;
     padding: 10px 20px;
 }
 
@@ -358,7 +380,6 @@ button[type="submit"] {
 button {
     font-size: 16px;
 }
-
 
 h2,
 h5 {
@@ -482,16 +503,15 @@ body {
     background-color: #FFFFFF;
 }
 
-
-.pr-info-pic{
-    height:40vh;
+.pr-info-pic {
+    height: 40vh;
 }
 
 .product-image {
     width: 150px;
     height: 150px;
     background-color: #eee;
-    margin: 0 auto 15px;    
+    margin: 0 auto 15px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -523,10 +543,10 @@ body {
 
 .form-group.radio-group .radio-options label {
     margin-left: 5px;
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
-.btn-min-width-padding{
+.btn-min-width-padding {
     min-width: 80px;
     width: max-content;
     padding: 3px;
@@ -636,7 +656,7 @@ body {
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    text-align: center; /* Align the h1 text to center */
+    text-align: center;
 }
 
 .form-label {
@@ -647,8 +667,8 @@ h1 {
     border-radius: 5px;
     border: 1px solid #ddd;
     padding: 10px;
-    max-width: 600px; /* Restricting the width */
-    margin: 0 auto; /* Centering the input fields */
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .form-control-plaintext {
@@ -656,8 +676,8 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f8f9fa;
-    max-width: 600px; /* Restricting the width */
-    margin: 0 auto; /* Centering the input fields */
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .btn-primary {
@@ -667,8 +687,8 @@ h1 {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    display: block; /* To make button center aligned */
-    margin: 20px auto; /* To center align */
+    display: block;
+    margin: 20px auto;
 }
 
 .d-flex.align-items-end {
@@ -704,4 +724,160 @@ img.img-fluid {
     font-size: 48px;
     color: #090909;
     cursor: pointer;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .overview-box h1 {
+        font-size: 36px;
+    }
+
+    .overview-box p {
+        font-size: 16px;
+    }
+
+    .sidebar {
+        font-size: 18px;
+    }
+
+    .sidebar .username {
+        font-size: 22px;
+    }
+
+    .sidebar .nav-item {
+        font-size: 18px;
+    }
+
+    .sidebar .nav-item i {
+        font-size: 26px;
+    }
+
+    .product-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .error-image {
+        width: 100px;
+    }
+
+    .error-icon {
+        font-size: 36px;
+    }
+
+    .display-1 {
+        font-size: 48px;
+    }
+
+    .lead {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-bar input {
+        border-radius: 25px;
+    }
+
+    .button-search {
+        margin-top: 10px;
+        border-radius: 25px;
+        padding: 8px 16px;
+    }
+
+    .product-card {
+        padding: 10px;
+    }
+
+    .product-info h3 {
+        font-size: 18px;
+    }
+
+    .product-info p {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .footer-links li {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 10px;
+    }
+
+    .sidebar .username {
+        font-size: 20px;
+    }
+
+    .sidebar .nav-item {
+        font-size: 16px;
+    }
+
+    .sidebar .nav-item i {
+        font-size: 24px;
+    }
+
+    .overview-box h1 {
+        font-size: 32px;
+    }
+
+    .overview-box p {
+        font-size: 14px;
+    }
+
+    .error-image {
+        width: 80px;
+    }
+
+    .error-icon {
+        font-size: 32px;
+    }
+
+    .display-1 {
+        font-size: 40px;
+    }
+
+    .lead {
+        font-size: 18px;
+    }
 }

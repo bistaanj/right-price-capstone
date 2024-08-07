@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Price Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
@@ -22,7 +22,7 @@
                 $search = isset($_GET['search']) ? $_GET['search'] : '';
             ?>
             <input type="text" id="searchInput" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;" value="<?php echo htmlspecialchars($search); ?>">
-            <img src="../images/Search.png" alt="Search Icon" class="search-icon ml-2" onclick="searchFunction()">
+            <img src="../images/Search.png" alt="Search Icon" class="search-icon1 ml-2" onclick="searchFunction()">
         </div>
         <div class="row">
             <?php

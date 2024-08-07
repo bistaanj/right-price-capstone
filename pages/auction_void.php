@@ -8,7 +8,7 @@ include '../includes/checkSession.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include '../includes/scripts.php'; ?>
-
+    <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <title>Result</title>
 </head>
 <body>
