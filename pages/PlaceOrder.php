@@ -5,7 +5,8 @@ if (isset($_SESSION['checkout_product'])) {
     $info = $_SESSION['checkout_product'];
     $data = $info[0];
 } else {
-    header('Location:error.php');
+    header('Location: error.php');
+    exit;
 }
 ?>
 
@@ -15,8 +16,9 @@ if (isset($_SESSION['checkout_product'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Order</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -32,43 +34,38 @@ if (isset($_SESSION['checkout_product'])) {
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-lg-6">
-                                <p><strong>Product name:</strong> <?php echo $data['product_name'] ?></p>
+                                <p><strong>Product name:</strong> <?php echo htmlspecialchars($data['product_name']); ?></p>
                             </div>
                             <div class="col-lg-6">
-                                <p><strong>Price:</strong> $<?php echo $data['product_price'] ?> per <?php echo $data['product_unit'] ?></p>
+                                <p><strong>Price:</strong> $<?php echo htmlspecialchars($data['product_price']); ?> per <?php echo htmlspecialchars($data['product_unit']); ?></p>
                             </div>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <p id="description" class="form-control-plaintext"><?php echo $data['product_description'] ?></p>
-                        </div> -->
-                        <form action="../php/sendOrder.php" method = "POST">
+                        <form action="../php/sendOrder.php" method="POST">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="inputEmail4">Quantity</label>
-                                <input type="number" min='1' name='quantity'  class="form-control" id="inputEmail4" placeholder="Quantity">
+                                    <label for="inputQuantity">Quantity</label>
+                                    <input type="number" min="1" name="quantity" class="form-control" id="inputQuantity" placeholder="Quantity" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                <strong> <label for="inputPassword4">Address Details</label></strong>
-                                
+                                    <label for="inputAddressDetails"><strong>Address Details</strong></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control"  name='address' id="inputAddress" placeholder="1234 Main St">
+                                <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St" required>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress2">Address 2</label>
-                                <input type="text" class="form-control"  name='address_secondary' id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                <input type="text" class="form-control" name="address_secondary" id="inputAddress2" placeholder="Apartment, studio, or floor">
                             </div>
-                            <div class="form-row d-flex ">
+                            <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="inputCity">City</label>
-                                    <input type="text"  name='city' class="form-control" id="inputCity">
+                                    <input type="text" name="city" class="form-control" id="inputCity" required>
                                 </div>
-                                <div class="form-group col-md-3 ms-3">
+                                <div class="form-group col-md-3">
                                     <label for="inputState">State</label>
-                                    <select id="inputState" class="form-control"  name='state'>
+                                    <select id="inputState" class="form-control" name="state" required>
                                         <option value="AB">Alberta</option>
                                         <option value="BC">British Columbia</option>
                                         <option value="MB">Manitoba</option>
@@ -84,24 +81,25 @@ if (isset($_SESSION['checkout_product'])) {
                                         <option value="YT">Yukon</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-2 ms-3">
+                                <div class="form-group col-md-2">
                                     <label for="inputZip">Zip</label>
-                                    <input type="text" name='zip'  class="form-control" id="inputZip">
+                                    <input type="text" name="zip" class="form-control" id="inputZip" required>
                                 </div>
                                 <!-- default Values -->
                                 <div class="form-group col-md-2">
-                                    <input type="text" name='product_id' style="display: none;" value = ' <?php echo $data['product_id'] ?> '  >
-                                    <input type="text" name='seller_id' style="display: none;" value = ' <?php echo $data['user_id'] ?> '  >
+                                    <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($data['product_id']); ?>">
+                                    <input type="hidden" name="seller_id" value="<?php echo htmlspecialchars($data['user_id']); ?>">
                                 </div>
-                            </div>  
-                            <div class="form-group col-md-4">
-                                <label for="inputZip">Contact number</label>
-                                    <input type="tel" name='phone'  class="form-control" id="inputZip"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                             </div>
-                            <div class="form-row d-flex justify-content-center ">
-                                <div class="col-lg-6 ">
-                                <button class="btn btn-primary w-100">Place Order</button>
-                            </div>                            
+                            <div class="form-group col-md-4">
+                                <label for="inputPhone">Contact number</label>
+                                <input type="tel" name="phone" class="form-control" id="inputPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-primary w-100">Place Order</button>
+                                </div>
+                            </div>
                         </form>                        
                     </div>
                 </div>
@@ -109,5 +107,8 @@ if (isset($_SESSION['checkout_product'])) {
         </div>
     </main>
     <?php include '../includes/footer.php'; ?>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
