@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Price Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <?php include '../includes/scripts.php' ?>
 </head>
 
@@ -19,10 +20,12 @@
     <?php include "../includes/navigation.php" ?>    
 
     <main class="container-xl mt-4 flex-grow-1">
-        <div class="search-bar d-flex flex-row mb-4">
-            <form action="../php/searchProducts.php" method="POST" class="d-flex flex-row align-items-center">
-                <input type="text" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;" name="productName_search">
-                <button type="submit" name="productSearch" class="button-search ml-2"></button>
+    <div class="search-bar d-flex flex-row mb-4">
+            <form action="../php/searchProducts.php" method="POST" class="d-flex flex-row align-items-center w-100">
+                <input type="text" class="form-control rounded-pill" placeholder="Search" name="productName_search">
+                <button type="submit" name="productSearch" class="button-search">
+                    <i class="bi bi-search search-icon"></i> 
+                </button>
             </form>
         </div>
         <div class="row">
@@ -39,7 +42,7 @@
                             ?>                
                             <div class="product-card">
                                 <div class="product-image">
-                                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                                    <img src="../images/<?php echo $data['product_image']?>" alt="">
                                 </div>
                                 <div class="product-info">
                                     <h3><?php echo htmlspecialchars($data['product_name']); ?></h3>
@@ -90,6 +93,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

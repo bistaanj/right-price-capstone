@@ -17,6 +17,7 @@ if (isset($_GET['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <?php include '../includes/scripts.php'; ?>
 
     <title>Result</title>
@@ -42,6 +43,7 @@ if (isset($_GET['name'])) {
             <p>We look forward to hosting another auction soon.</p>
         </div>
     </div>
+    <?php include '../includes/footer.php'; ?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

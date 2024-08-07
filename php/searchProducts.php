@@ -2,14 +2,15 @@
 require_once '../php/connection.php';
 session_start();
 
-// echo $_POST['productName_search'];
+
 
 if (strlen($_POST['productName_search']) > 0) {
     $name = $_POST['productName_search'];
+    $user_id = $_SESSION['user_id'];
 
-    $querry = "SELECT * from tbl_products where (product_name = ? or keyword like '%$name%') AND product_status != 'INACTIVE' ";
+    $querry = "SELECT * from tbl_products where (product_name = ? or keyword like '%$name%') AND product_status != 'INACTIVE' AND user_id != ?  ";
     $bind_statement = $connect->prepare($querry);
-    $bind_statement->bind_param("s", $name, );
+    $bind_statement->bind_param("si", $name, $user_id );
     $bind_statement->execute();
     $result = $bind_statement->get_result();
     if (isset($_SESSION['product_info'])) {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Price Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -52,7 +53,7 @@ $products = $_SESSION['user_products'];
                     <th scope="row" class='text-center align-middle'><?php echo htmlspecialchars($data['product_id']); ?></th>
                     <td>
                         <div class="container d-flex justify-content-center">
-                            <img src="../images/<?php echo htmlspecialchars($data['product_image']) ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image">
+                            <img src="../images/<?php echo $data['product_image'] ?: 'RightPriceLogo.jpeg'; ?>" class="img-thumbnail" alt="Product Image" style="width: 100px; height: auto; margin-right: 10px;">
                         </div>
                         <div class="container-fluid text-center">
                             <?php echo htmlspecialchars($data['product_name']); ?>
@@ -190,10 +191,11 @@ $products = $_SESSION['user_products'];
                 <div class="modal-body">
                     <p class="p-2">Your product visibility will change in the market.</p>
                 </div>
-                <div class="modal-footer d-flex flex-column">
-                    <form id='deactiveForm' action="" method="POST">
-                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
-                        <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, change</button>
+                <div class="modal-footer d-flex">
+                    <form id='deactiveForm' action="" method="POST" class='d-flex' >
+                        <button type="button" class="btn btn-primary m-2 " style="width:150px; border-radius: 5px;" data-bs-dismiss="modal">No</button>
+                        <button type="submit" name="send_offer" class="btn btn-warning m-2" style="width:150px; border-radius: 5px;">Yes, change</button>
+
                     </form>
                 </div>
             </div>
@@ -249,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<?php include '../includes/footer.php'; ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

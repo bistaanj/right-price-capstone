@@ -1,24 +1,20 @@
 <?php
 require_once '../php/connection.php';
+include '../includes/checkSession.php';
+
 
 try {
-    session_start();
-    
-    // Clear product_info session variable
+    $user_id = $_SESSION['user_id'];
+    $status = 'INACTIVE';
     if (isset($_SESSION['product_info'])) {
         unset($_SESSION['product_info']);
     }
+    $querry = "SELECT * from tbl_products WHERE product_status != ? AND user_id != ? ORDER By RAND() LIMIT 8";
+    $bind_statement = $connect->prepare($querry);
+    $bind_statement->bind_param('si', $status , $user_id);
+    $bind_statement->execute();
+    $result = $bind_statement->get_result();
 
-    // Prepare the query using a prepared statement
-    $query = "SELECT * FROM tbl_products WHERE product_status != ? ORDER BY RAND() LIMIT 8";
-    $stmt = $connect->prepare($query);
-    $status = 'INACTIVE';
-    $stmt->bind_param('s', $status);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Fetch products
-    $products_info = [];
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $products_info[] = $row;
