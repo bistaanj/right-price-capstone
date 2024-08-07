@@ -154,10 +154,11 @@ $products = $_SESSION['user_products'];
                 <div class="modal-body">
                     <p class="p-2">Your product visibility will change in the market.</p>
                 </div>
-                <div class="modal-footer d-flex flex-column">
-                    <form id='deactiveForm' action="" method="POST">
-                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">No</button>
-                        <button type="submit" name="send_offer" class="btn btn-danger m-2">Yes, change</button>
+                <div class="modal-footer d-flex">
+                    <form id='deactiveForm' action="" method="POST" class='d-flex' >
+                        <button type="button" class="btn btn-primary m-2 " style="width:150px; border-radius: 5px;" data-bs-dismiss="modal">No</button>
+                        <button type="submit" name="send_offer" class="btn btn-warning m-2" style="width:150px; border-radius: 5px;">Yes, change</button>
+
                     </form>
                 </div>
             </div>

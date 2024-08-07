@@ -75,16 +75,21 @@ if (isset($_SESSION['current_product'])) {
                             <div  style="width:80%; height:80%">
                                 <img src="/images/<?php echo $data["product_image"]; ?>" style="width:100%; height:100%;" alt="">
                             </div>
-                            <div class="text-center mt-2">
+                             <div class="row justify-content-center">
+                            <span class="h1 mt-1">
+                                <?php echo $data["product_name"]; ?>
+                            </span>
+                        </div>
+                            <div>
                                 <?php
-                                    if ($data['sale_type'] == 'Auction'){
-                                        echo 'Reserve Price:';
-                                    }
-                                    else{
-                                        echo 'Price:';
-                                    }
+                                if ($data['sale_type'] == 'Auction') {
+                                    echo 'Reserve Price:';
+                                } else {
+                                    echo 'Price:';
+                                }
                                 ?>
-                          $<?php echo $data["product_price"]; ?>/- per <?php echo $data["product_unit"]; ?>
+                                $<?php echo $data["product_price"]; ?>/- per <?php echo $data["product_unit"]; ?>
+                              
                             </div>
 
                         </div>
@@ -94,18 +99,17 @@ if (isset($_SESSION['current_product'])) {
                     <!-- Description Side Starts -->
                     <div class="col-md-6 offset-md-1">
                         <div class="row justify-content-center">
-                            <span class="h2">
-                                <?php echo $data["product_name"]; ?>
+                            <span class="h2 mt-3">
+                                <?php echo $data["product_short_description"]; ?>
                             </span>
                         </div>
                         <div class="row border-bottom border-danger border-2 mt-3 p-2">
                             <div class="col-md-4">
-                                Seller
+                                Seller : <strong>  <?php echo $data["fname"]; ?>  <?php echo $data["lname"]; ?> </strong>
                             </div>
-                            <div class="col-md-8">
-                                Status : <button class="btn-sm btn-primary" style="padding: 2px 5px; font-size: 12px; width:fit-content;">
-                                    <?php echo $data["product_status"]; ?>
-                                </button>
+                            <div class="col-md-4 d-flex ">
+                                Type : <strong class='text-white bg-primary px-2 rounded ml-1'> <?php echo $data["sale_type"]; ?> </strong>
+                                
                             </div>
                         </div>
                         <div class="row justify-content-center m-2">
@@ -129,16 +133,17 @@ if (isset($_SESSION['current_product'])) {
                         <div class="col mt-3">
                             <form action="../php/add_wishlist_item.php" method='POST'>
                             <input type="hidden" name="product_id" value='<?php  echo $data['product_id'] ?>' >
-                            <button type='submit' class="btn-lg btn-primary rounded-pill border-0"> <span class="text-white">  Add to Wishlist <i class="bi bi-heart-fill float-right"></i> </span></button>
+                            <button type='submit' class="btn-lg btn-primary rounded-pill border-0" style='width:170px;'> <span class="text-white">  Add to Wishlist  </span></button>
                             </form>
                         </div>
 
                         <?php
                         if ($data['sale_type'] == 'Sale') { ?>
                             <div class="col mt-3">
-                            <a href="../php/placeOrder.php?id=<?php echo $data['product_id'] ?> ">
-                            <button class="btn-lg btn-primary rounded-pill border-0"> Place Order </button>
-                            </a>
+                                <form action="../php/placeOrder.php?id=<?php echo $data['product_id'] ?>">
+                                    <button type='submit' class="btn-lg btn-warning rounded-pill border-0" style='width:170px;'> <span class="text-white">  Place Order </span> </button>
+                                </form>
+                            
                         </div>
                             <?php                        }
                         ?>
