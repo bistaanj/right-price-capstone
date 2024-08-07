@@ -4,7 +4,7 @@ $req_product = $_GET['id'];
 session_start();
 
 try {
-    $querry = "SELECT * from tbl_products where product_id = ?";
+    $querry = "SELECT p.*, u.fname, u.lname from tbl_products p JOIN tbl_user u ON u.user_id = p.user_id where p.product_id = ?  ";
     $bind_statement = $connect->prepare($querry);
     $bind_statement->bind_param("i", $req_product);
     $bind_statement->execute();

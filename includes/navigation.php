@@ -1,3 +1,24 @@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+        function confirmDelete(form) {
+            swal({
+                title: "Logout?",
+                text: "Any incomplete form will not be saved.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                } else {
+                    // swal("Session is still live.");
+                }
+            });
+        }
+    </script>
+
 <header class="d-flex justify-content-between align-items-center p-3 bg-light">
     <div class="logo">
         <img src="../images/RightPriceLogo.jpeg" alt="Logo">
@@ -29,33 +50,18 @@
                 </a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link d-flex flex-column align-items-center" data-bs-toggle="modal" data-bs-target="#logoutModal">
+
+            <form action='../php/logout.php' method='post' class='mb-2'>
+                <button type='button' class='btn btn-primary d-flex align-items-center justify-content-center' onclick='confirmDelete(this.form)'>
                     <i class="bi bi-box-arrow-right"></i>
-                    <span>Logout</span>
-                </a>
+                </button>
+            </form>
+                
             </li>
         </ul>
     </nav>
 </header>
 
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="logoutModalLabel">Logout <i class="bi bi-lock"></i></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <i class="bi bi-question-circle"></i> Are you sure you want to logout?
-            </div>
-            <div class="modal-footer">
-                <form action="../php/logout.php" method="post">
-                    <button class="btn btn-danger btn-block" type="submit" name="submit"> Yes, logout</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Include necessary JS files -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
