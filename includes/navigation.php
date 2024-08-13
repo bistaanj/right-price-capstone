@@ -1,3 +1,7 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
@@ -26,25 +30,25 @@
     <nav>
         <ul class="nav">
             <li class="nav-item text-center">
-                <a class="nav-link d-flex flex-column align-items-center" href="../php/dashboardsetup.php">
+                <a class="nav-link d-flex flex-column align-items-center <?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>" href="dashboard.php">
                     <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link d-flex flex-column align-items-center" href="wishlist.php">
+                <a class="nav-link d-flex flex-column align-items-center <?php echo ($current_page == 'wishlist.php') ? 'active' : ''; ?>" href="wishlist.php">
                     <i class="bi bi-bag-check"></i>
                     <span>Wishlist</span>
                 </a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link d-flex flex-column align-items-center" href="../php/marketProducts.php">
+                <a class="nav-link d-flex flex-column align-items-center <?php echo ($current_page == 'market.php') ? 'active' : ''; ?>" href="market.php">
                     <i class="bi bi-shop"></i>
                     <span>Market</span>
                 </a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
+                <a class="nav-link d-flex flex-column align-items-center <?php echo ($current_page == 'blogs.php') ? 'active' : ''; ?>" href="blogs.php">
                     <i class="bi bi-book"></i>
                     <span>Blogs</span>
                 </a>
