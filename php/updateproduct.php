@@ -47,7 +47,7 @@ if (isset($_POST['product_id'])) {
     // Execute the statement
     if ($stmt->execute()) {
         // Redirect to userproducts.php with a success message
-        header('Location: ../pages/userproducts.php?status=success');
+        header('Location: ../php/getUserProducts.php?status=success');
         exit();
     } else {
         echo "Error updating record: " . $stmt->error;

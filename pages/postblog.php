@@ -8,64 +8,55 @@
     <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
-<header class="d-flex justify-content-between align-items-center p-3 bg-light">
-        <div class="logo">
-            <img src="../images/RightPriceLogo.jpeg" alt="Logo">
-        </div>
-        <nav>
-            <ul class="nav">
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="dashboard.php">
-                        <i class="bi bi-speedometer2"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="wishlist.php">
-                        <i class="bi bi-bag-check"></i>
-                        <span>Wishlist</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="market.php">
-                        <i class="bi bi-shop"></i>
-                        <span>Market</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="blogs.php">
-                        <i class="bi bi-pencil-square"></i>
-                        <span>Blogs</span>
-                    </a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link d-flex flex-column align-items-center" href="../php/logout.php">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include '../includes/checkSession.php'; ?>
+    <?php include '../includes/navigation.php'; ?>
+   
+<?php
+if (isset($_GET['imageType'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Image type not allowed", "Please select JPEG, PNG, JPG, or GIF image types." , "error"); })</script>';
+} elseif (isset($_GET['imageSize'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Image Size exceeded", "Image must be upto 5MB", "error"); })</script>';
+} elseif (isset($_GET['imagePath'])) {
+    echo '<script>window.addEventListener("load", function() { swal("Image not selected", "You must select and image", "error"); })</script>';
+}
+?>
+
+
     <!-- post button name - post-button -->
     <main class="container mt-5">
         <h2 class="text-center">Post a Blog</h2>
         <form action="../php/postblogendpoint.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <input name="title" type="text" class="form-control rounded-pill" placeholder="Title">
+                <input name="title" type="text" class="form-control rounded-pill" placeholder="Title" 
+                    <?php if (isset($_SESSION['blog_title'])) {
+                        echo 'value="' . htmlspecialchars($_SESSION['blog_title']) . '"';
+                    } ?> >
+
             </div>
             <div class="form-group">
-                <input name="image" type="file" class="form-control rounded-pill" placeholder="Cover Picture">
+                <input name="image" type="file" class="form-control rounded-pill" placeholder="Cover Picture" accept=".jpg, .jpeg, .png, .gif">
+            </div>
+            <div class="form-group text-center">
+                Your Blog Content.
             </div>
             <div class="form-group">
-                <textarea name="blog_content" class="form-control" rows="10" placeholder="Write your blog here..."></textarea>
+                <textarea name="blog_content" class="form-control" rows="10">
+                <?php echo isset($_SESSION['blog_content']) ? htmlspecialchars($_SESSION['blog_content']) : ''; ?>
+                </textarea>
             </div>
-            <div class="text-center">
-                <button name="post-button" type="submit" class="btn btn-primary rounded-pill px-4">Post</button>
+            <div class=" form-group">
+                <button name="post-button" type="submit" class="btn btn-primary rounded-pill px-4">
+                    <i class="fa-regular fa-square-check"></i> Post
+                </button>
+                <button name="clear-button" type="submit" class="btn btn-primary bg-danger rounded-pill px-4"> 
+                    <i class="fa-solid fa-eraser"></i> Clear
+                </button>
             </div>
         </form>
     </main>

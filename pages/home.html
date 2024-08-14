@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right Price - Your Produce Solution</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .hero {
+            background: url('../images/hero-image.jpg') no-repeat center center;
+            background-size: cover;
+            height: 600px;
+            width: 90%;
+            color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: auto;
+            position: relative;
+            opacity: 0.8;
+            /* Reduce opacity slightly for a soft background */
+        }
+
+        .hero-content {
+            z-index: 2;
+            /* Ensure the content is above the background */
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            background-color: #4c79ca;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            background-color: #4c79ca;
+
+        }
+
+        .features {
+            padding: 50px 0;
+        }
+
+        .card  {
+            border: none;
+        }
+
+        .card  i {
+            font-size: 3rem;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero d-flex flex-column">
+        <div class="hero-content">
+            <h1>Right Price</h1>
+            <p>Your one stop solution to selling your produce</p>
+        </div>
+        <div class="button">
+            <a href="../pages/signup.php">
+
+                <button class="btn btn-primary btn-lg" style="text-decoration: underline;"> Get Started </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container features">
+        <h2 class="text-center mb-5">Our Features</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-store"></i>
+                        <h5 class="card-title mt-3">Selling Your Products</h5>
+                        <p class="card-text">Easily list and sell your products to a wide audience.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-gavel"></i>
+                        <h5 class="card-title mt-3">Auction</h5>
+                        <p class="card-text">Participate in auctions to get the best prices for your produce.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line"></i>
+                        <h5 class="card-title mt-3">Dashboard</h5>
+                        <p class="card-text">Track your sales and performance with our intuitive dashboard.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  m-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fa-regular fa-envelope"></i>
+                        <h5 class="card-title mt-3">Email Notification</h5>
+                        <p class="card-text">Get email notifications to all you auctions and sales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

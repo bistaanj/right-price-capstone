@@ -17,7 +17,7 @@
 <main>
 
 <?php 
-session_start();
+include '../includes/checkSession.php';
 require_once '../php/connection.php';
 
 // Get the user ID from the session

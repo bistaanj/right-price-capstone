@@ -77,10 +77,20 @@
                     endforeach;
                 endif;
                 ?>
-            
+               
                 </div>
             </div>
-        </div>
+        
+         <?php
+         if (count($product_info) < 1):
+             ?>
+                        <div class="h2 text-center d-flex align-self-center justify-self-center"> 
+                            <p class='align-items-center'> Sorry, no Product found. </p>
+                        </div>
+                        <?php
+         endif;
+         ?>
+            </div>
         
     </main>
     

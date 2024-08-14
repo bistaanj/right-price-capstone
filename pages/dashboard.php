@@ -11,6 +11,7 @@ include '../includes/checkSession.php'
     <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -24,32 +25,33 @@ include '../includes/checkSession.php'
         <div class="row mt-4">
             <aside class="col-md-3">
                 <div class="sidebar p-3 rounded">
-                    <div class="username mb-4 d-flex align-items-center">
-                        <i class="bi bi-person-circle" style="margin-right: 10px;"></i>
-                        <span style="color: yellow;"> 
+                    <div class="d-flex flex-column align-items-center text-center" style="height: 120px">   
+                        <div>
+                            <i class="fa fa-user-large fa-4x" aria-hidden="true"></i>                      
+                        </div>                   
+                        <div class="h2 mt-1">
                             <?php
-                               
-                               echo ($_SESSION['username']);
-                               ?>
-                               </span>
+                            echo ($_SESSION['username']);
+                            ?>                       
+                            </div>   
                     </div>
+                    
+                       
                     <ul class="nav flex-column">
+                        
                         <li class="nav-item mb-3 d-flex align-items-center">
-                            <i class="bi bi-box"></i>
+                            <i class="fa-solid fa-dolly"></i>
                             <a class="nav-link" href="sell_product.php">Sell a Product</a>
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
-                            <i class="bi bi-box-seam"></i>
+                            <i class="fa-solid fa-warehouse"></i>
                             <a class="nav-link" href="../php/getUserproducts.php">Your Products</a>
                         </li>
                         <li class="nav-item mb-3 d-flex align-items-center">
-                            <i class="bi bi-box-seam"></i>
+                            <i class="fa-solid fa-truck"></i>
                             <a class="nav-link" href="../php/getOrders.php">Your Orders</a>
                         </li>
-                        <li class="nav-item mb-3 d-flex align-items-center">
-                            <i class="bi bi-pencil-square"></i>
-                            <a class="nav-link" href="postblog.php">Post a Blog</a>
-                        </li>
+                       
                     </ul>
                 </div>
             </aside>

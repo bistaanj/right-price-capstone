@@ -3,7 +3,7 @@ require_once '../php/connection.php';
 include '../includes/checkSession.php';
 
 try {
-    session_start();
+    
     $user_id = $_SESSION['user_id'];
     $saleType = $_POST["sales_type"];
     $name = $_POST["product_name"];
@@ -23,7 +23,13 @@ try {
     }
 
     // Prepare SQL query
-    $query = "INSERT INTO tbl_products (user_id, product_name, product_unit, product_category, product_price, product_image, product_description, product_added, product_status, sale_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO tbl_products (user_id, product_name,
+                                     product_unit, product_category, 
+                                     product_price, product_image, 
+                                     product_description,product_short_description, 
+                                     product_added, product_status, 
+                                     sale_type)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     $stmt = $connect->prepare($query);
 
     // Bind parameters
@@ -31,7 +37,7 @@ try {
 
     // Execute the query
     if ($stmt->execute()) {
-        header("Location: ../pages/userproducts.php?status=success");
+        header("Location: ../php/getUserProducts.php");
         exit();
     } else {
         throw new Exception("Error executing query: " . $stmt->error);

@@ -24,6 +24,11 @@
             <input type="text" id="searchInput" class="form-control rounded-pill" placeholder="Search" style="max-width: 600px;" value="<?php echo htmlspecialchars($search); ?>">
             <img src="../images/Search.png" alt="Search Icon" class="search-icon1 ml-2" onclick="searchFunction()">
         </div>
+        <div class="m-2 d-flex justify-content-end">
+            <a href="postblog.php" style="text-decoration:none;">
+                <button type ='button' class="btn btn-primary" onclick="postblog.php"> <i class="bi bi-plus"></i> Add Blog</button>
+            </a>
+        </div>
         <div class="row">
             <?php
                 require_once '../php/connection.php';
@@ -36,7 +41,7 @@
                             u.fname, u.lname 
                         FROM tbl_blog b
                         JOIN tbl_user u ON b.blog_author = u.user_id
-                        WHERE b.blog_contents LIKE ?";
+                        WHERE b.blog_title LIKE ?";
                 $stmt = $connect->prepare($sql);
                 $stmt->bind_param('s', $search);
                 $stmt->execute();

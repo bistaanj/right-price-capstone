@@ -5,7 +5,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-    function confirmDelete(form) {
+    function confirmLogout(form) {
         swal({
             title: "Logout?",
             text: "Any incomplete form will not be saved.",
@@ -42,7 +42,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link d-flex flex-column align-items-center <?php echo ($current_page == 'market.php') ? 'active' : ''; ?>" href="market.php">
+                <a class="nav-link d-flex flex-column align-items-center <?php echo ($current_page == 'market.php') ? 'active' : ''; ?>" href="../php/marketproducts.php">
                     <i class="bi bi-shop"></i>
                     <span>Market</span>
                 </a>
@@ -55,7 +55,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </li>
             <li class="nav-item text-center">
                 <form action='../php/logout.php' method='post' class='mb-2'>
-                    <a class="nav-link d-flex flex-column align-items-center" href="#" onclick='confirmDelete(this.form)'>
+                    <a class="nav-link d-flex flex-column align-items-center" href="#" onclick="confirmLogout(this.closest('form'))">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Logout</span>
                     </a>

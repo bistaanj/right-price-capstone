@@ -15,8 +15,11 @@ include '../includes/checkSession.php';
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
-<body>
-
+<body class='d-flex'>
+    <?php 
+     include '../includes/navigation.php'
+    ?> 
+<main class=" col-md-10 align-self-center" >
 <?php
 
 if (isset($_SESSION['current_product'])) {
@@ -24,9 +27,6 @@ if (isset($_SESSION['current_product'])) {
     $data = $info[0];
 }
 ?>
-<?php 
- include '../includes/navigation.php'
-?> 
 <?php 
     if(isset($_GET["offer_status"])):
         if($_GET["offer_status"]=='value'):
@@ -64,7 +64,7 @@ if (isset($_SESSION['current_product'])) {
     endif;
     endif;
 ?>
-    <div class="row justify-content-center mt-2">
+    <div class="justify-content-center mt-2">
         <div class="col-md-11 ">
             <div class="container-fluid ">
                 <!-- First Row Starts -->
@@ -197,6 +197,8 @@ if (isset($_SESSION['current_product'])) {
     </div>
         </div>
     </div>
+</main>
+
     <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

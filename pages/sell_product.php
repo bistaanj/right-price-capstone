@@ -7,6 +7,8 @@
     <link rel="icon" type="image/x-icon" href="../images/RightPriceLogo.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="../css/styles.css">
     
     <script>
@@ -120,27 +122,12 @@
                 <textarea id="description" name="description" class="form-control" rows="4" required><?php echo isset($product) ? $product['product_description'] : ''; ?></textarea>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-circle-check"></i> Post Product</button>
             </div>
         </form>
     </main>
 
-    <footer class="footer mt-5">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="footer-left">
-                <img src="../images/RightPriceLogo.png" alt="Logo" class="footer-logo">
-                <h4>Right Price</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div class="footer-right">
-                <ul class="footer-links list-inline">
-                    <li class="list-inline-item"><a href="#">About</a></li>
-                    <li class="list-inline-item"><a href="#">Contact</a></li>
-                    <li class="list-inline-item"><a href="#">Careers</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
