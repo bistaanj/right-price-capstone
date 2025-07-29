@@ -24,7 +24,7 @@ Right Price is a full‑stack PHP/MySQL capstone project that turns the idea of 
 
 1. Clone or download this repository:
    ```bash
-   git clone 
+   git clone https://github.com/bistaanj/right-price-capstone.git
    ```
 2. Place it in your web server directory (e.g., `htdocs/` in XAMPP).
 3. Create a MySQL database named `db_rightprice` and import `databases/db_rightprice.sql` via phpMyAdmin.
